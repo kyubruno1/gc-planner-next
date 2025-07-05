@@ -1,0 +1,58 @@
+[
+  {
+    "name": "gaian",
+    "type": ["weapon", "gloves"],
+    "equipType": "card",
+    "img": "assets/images/cards/gaian.png",
+    "effects": [
+      {
+        "name": "crit_damage",
+        "value": 31.5
+      },
+      {
+        "name": "taint_resistance",
+        "value": 0.47
+      }
+    ]
+  },
+  {
+    "name": "Claustro Infinito - Morid",
+    "type": ["helmet"],
+    "equipType": "card",
+    "img": "assets/images/cards/infinite_cloister_morid.png",
+    "effects": [
+      {
+        "name": "defense",
+        "value": 130
+      }
+    ]
+  },
+  {
+    "name": "Apóstolo do Vazio (Pesadelo 1)",
+    "type": ["helmet"],
+    "equipType": "card",
+    "img": "assets/images/cards/voidal_apostle_nightmare_1.png",
+    "effects": [
+      {
+        "name": "defense",
+        "value": 145
+      },
+      {
+        "name": "taint_resistance",
+        "value": 0.57
+      }
+    ]
+  },
+  {
+    "name": "Claustro Infinito - Criação Instável",
+    "type": ["helmet"],
+    "equipType": "card",
+    "img": "assets/images/cards/infinite_cloister_unstable_creation.png",
+    "effects": [
+      {
+        "name": "hp",
+        "value": 145
+      }
+    ]
+  }
+]

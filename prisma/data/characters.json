@@ -1,0 +1,143 @@
+[
+  {
+    "name": "elesis",
+    "img": "/assets/images/characters/select-characters/elesis.png",
+    "qtJobs": 4,
+    "jobs": {
+      "first_job": [
+        {
+          "name": "attack",
+          "value": 20
+        },
+        {
+          "name": "hp",
+          "value": 20
+        }
+      ],
+      "second_job": [
+        {
+          "name": "attack",
+          "value": 30
+        },
+        {
+          "name": "hp",
+          "value": 30
+        }
+      ],
+      "third_job": [
+        {
+          "name": "attack",
+          "value": 40
+        },
+        {
+          "name": "hp",
+          "value": 40
+        }
+      ],
+      "forth_job": [
+        {
+          "name": "attack",
+          "value": 50
+        },
+        {
+          "name": "hp",
+          "value": 50
+        }
+      ]
+    }
+  },
+  {
+    "name": "lire",
+    "img": "/assets/images/characters/select-characters/lire.png",
+    "qtJobs": 4,
+    "jobs": {
+      "first_job": [
+        {
+          "name": "crit_chance",
+          "value": 1.00
+        },
+        {
+          "name": "attack",
+          "value": 20
+        }
+      ],
+      "second_job": [
+        {
+          "name": "crit_chance",
+          "value": 1.00
+        },
+        {
+          "name": "attack",
+          "value": 30
+        }
+      ],
+      "third_job": [
+        {
+          "name": "crit_chance",
+          "value": 1.00
+        },
+        {
+          "name": "attack",
+          "value": 40
+        }
+      ],
+      "forth_job": [
+        {
+          "name": "crit_chance",
+          "value": 1.00
+        },
+        {
+          "name": "attack",
+          "value": 50
+        }
+      ]
+    }
+  },
+  {
+    "name": "arme",
+    "img": "/assets/images/characters/select-characters/arme.png",
+    "qtJobs": 4,
+    "jobs": {
+      "first_job": [
+        {
+          "name": "sp_attack",
+          "value": 20
+        },
+        {
+          "name": "attack",
+          "value": 20
+        }
+      ],
+      "second_job": [
+        {
+          "name": "sp_attack",
+          "value": 30
+        },
+        {
+          "name": "attack",
+          "value": 30
+        }
+      ],
+      "third_job": [
+        {
+          "name": "sp_attack",
+          "value": 40
+        },
+        {
+          "name": "attack",
+          "value": 40
+        }
+      ],
+      "forth_job": [
+        {
+          "name": "sp_attack",
+          "value": 50
+        },
+        {
+          "name": "attack",
+          "value": 50
+        }
+      ]
+    }
+  }
+]

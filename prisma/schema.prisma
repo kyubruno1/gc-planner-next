@@ -1,0 +1,189 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Build {
+  id           String            @id @default(uuid())
+  sheetName    String
+  savedAt      DateTime          @default(now())
+  jobKey       String
+  character    Character         @relation(fields: [characterId], references: [id])
+  characterId  String
+  totalAttack  Float
+
+  equipments   BuildEquipment[]
+  status       BuildStatus?
+  combinedSets CombinedSet[]
+
+  @@index([characterId])
+}
+
+model Character {
+  id        String   @id @default(uuid())
+  name      String
+  img       String
+  qtJobs    Int
+  jobs      Job[]
+  builds    Build[]
+}
+
+model Job {
+  id           String     @id @default(uuid())
+  name         String
+  character    Character  @relation(fields: [characterId], references: [id])
+  characterId  String
+  statuses     JobStatus[]
+
+  @@index([characterId])
+}
+
+model JobStatus {
+  id      String   @id @default(uuid())
+  name    String
+  value   Int
+  job     Job      @relation(fields: [jobId], references: [id])
+  jobId   String
+
+  @@index([jobId])
+}
+
+model EquipmentBase {
+  id              String   @id @default(uuid())
+  name            String   @unique
+  type            String
+  bonusType       String?
+  equipType       String
+  grade           String
+  equipLvl        Int
+  img             String
+
+  total_attack    Int
+  attack          Int
+  crit_chance     Float
+  crit_damage     Float
+  sp_attack       Int
+  mp_rec          Float
+  hell_spear_chance Float
+  hell_spear      Int
+  taint_resistance Float
+  defense         Int
+  hp              Int
+  crit_resistance Float
+  sp_def          Int
+  hp_rec          Int
+  counter_attack_resistance Float
+  exp             Int
+  gp              Float
+
+  props           Json?
+  statusNeck      Json?
+
+  builds          BuildEquipment[]
+}
+
+model BuildEquipment {
+  id            String         @id @default(uuid())
+  build         Build          @relation(fields: [buildId], references: [id])
+  buildId       String
+  base          EquipmentBase  @relation(fields: [baseId], references: [id])
+  baseId        String
+
+  propsOverride Json?
+  cards         Card[]
+  stones        Stone[]
+
+  @@index([buildId])
+  @@index([baseId])
+}
+
+model CardBase {
+  id         String     @id @default(uuid())
+  name       String     @unique
+  type       String[]
+  equipType  String
+  img        String
+  effects    Json
+
+  cards      Card[]
+}
+
+model Card {
+  id               String           @id @default(uuid())
+  buildEquipment   BuildEquipment?  @relation(fields: [buildEquipmentId], references: [id])
+  buildEquipmentId String?          
+
+  base             CardBase         @relation(fields: [baseId], references: [id])
+  baseId           String
+
+  effectsOverride  Json?
+
+  @@index([buildEquipmentId])
+}
+
+model StoneBase {
+  id         String   @id @default(uuid())
+  stoneType  String
+  data       Json
+
+  stones     Stone[]
+}
+
+model Stone {
+  id               String           @id @default(uuid())
+  buildEquipment   BuildEquipment?  @relation(fields: [buildEquipmentId], references: [id])
+  buildEquipmentId String?          
+
+  base             StoneBase        @relation(fields: [baseId], references: [id])
+  baseId           String
+
+  dataOverride     Json?
+
+  @@index([buildEquipmentId])
+}
+
+model BuildStatus {
+  id                          String  @id @default(uuid())
+  build                       Build   @relation(fields: [buildId], references: [id])
+  buildId                     String  @unique
+
+  total_attack                Int
+  attack                      Int
+  crit_chance                 Float
+  crit_damage                 Float
+  sp_attack                   Int
+  mp_rec                      Float
+  hell_spear_chance           Float
+  hell_spear                  Float
+  taint_resistance            Float
+  defense                     Int
+  hp                          Int
+  crit_resistance             Float
+  sp_def                      Int
+  hp_rec                      Int
+  counter_attack_resistance   Float
+  exp                         Int
+  gp                          Float
+}
+
+model CombinedSet {
+  id        String              @id @default(uuid())
+  build     Build               @relation(fields: [buildId], references: [id])
+  buildId   String
+  setKey    String
+  effects   CombinedSetEffect[]
+
+  @@index([buildId])
+}
+
+model CombinedSetEffect {
+  id              String            @id @default(uuid())
+  combinedSet     CombinedSet       @relation(fields: [combinedSetId], references: [id])
+  combinedSetId   String
+  name            String
+  value           Float
+}
