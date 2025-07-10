@@ -246,7 +246,10 @@ export function Items({ name, equipmentType }: SlotProps) {
       [slotName]: data,
     }));
 
+
+    console.log(data)
     const status = stoneDataToStatus(data);
+    console.log(status, 'status')
     addSource("stone:" + slotName, status);
     equipStone(slotName, data);
     setStoneModal(false);
@@ -405,7 +408,7 @@ export function Items({ name, equipmentType }: SlotProps) {
       {stoneModal && equippedItem && (
         <StonesModalWrapper
           onClose={() => setStoneModal(false)}
-          rarity={equippedItem.grade as "normal" | "epic" | "ancient"}
+          rarity={equippedItem.grade as "normal" | "epic"}
           isAncient={equippedItem.grade === "ancient"}
           slotName={name}
           initialValue={stoneValues[name]}

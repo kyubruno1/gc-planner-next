@@ -10,7 +10,7 @@ export async function GET() {
         equipments: {
           include: {
             cards: true,
-            stones: true,
+            stone: true, // corrigido se for singular
           },
         },
       },
@@ -40,6 +40,8 @@ export async function POST(req: NextRequest) {
       equipped,
     } = body;
 
+    console.log("📦 Payload recebido:", JSON.stringify(body, null, 2));
+
     const build = await prisma.build.create({
       data: {
         characterId,
@@ -50,34 +52,41 @@ export async function POST(req: NextRequest) {
           create: status,
         },
         equipments: {
-          create: equipped.map((eq: any) => ({
-            baseId: eq.baseId,
-            propsOverride: eq.propsOverride,
-            cards: {
-              create: (eq.cards || []).map((card: any) => ({
-                baseId: card.baseId,
-                effectsOverride: card.effectsOverride,
-              })),
-            },
-            stones: {
-              create: (eq.stones || []).map((stone: any) => ({
-                baseId: stone.baseId,
-                dataOverride: stone.dataOverride,
-              })),
-            },
-          })),
+          create: equipped.map((eq: any) => {
+          console.log(eq)
+
+            const stoneCreate = eq.stone && eq.stone.baseId && eq.stone.dataOverride
+              ? {
+                  create: {
+                    baseId: eq.stone.baseId,
+                    dataOverride: eq.stone.dataOverride,
+                  },
+                }
+              : undefined;
+
+            return {
+              baseId: eq.baseId,
+              propsOverride: eq.propsOverride || {},
+              cards: {
+                create: (eq.cards || []).map((card: any) => ({
+                  baseId: card.baseId,
+                  effectsOverride: card.effectsOverride,
+                })),
+              },
+              stone: stoneCreate,
+            };
+          }),
         },
       },
     });
 
-
-    console.log('ok?')
     return NextResponse.json({ success: true, buildId: build.id });
-  } catch (error) {
-    console.error("Erro ao salvar build:", error);
+  } catch (error: any) {
+    console.error("❌ Erro ao salvar build:", error);
     return NextResponse.json(
-      { error: "Erro ao salvar build" },
+      { error: error.message || "Erro ao salvar build", stack: error.stack },
       { status: 500 }
     );
   }
 }
+

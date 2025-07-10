@@ -86,15 +86,15 @@ model EquipmentBase {
 }
 
 model BuildEquipment {
-  id            String         @id @default(uuid())
-  build         Build          @relation(fields: [buildId], references: [id])
+  id            String          @id @default(uuid())
+  build         Build           @relation(fields: [buildId], references: [id])
   buildId       String
-  base          EquipmentBase  @relation(fields: [baseId], references: [id])
+  base          EquipmentBase   @relation(fields: [baseId], references: [id])
   baseId        String
 
   propsOverride Json?
   cards         BuildCard[]
-  stones        BuildStone[]
+  stone        BuildStone?     // pedra opcional 1:1
 
   @@index([buildId])
   @@index([baseId])
@@ -129,21 +129,22 @@ model StoneBase {
   stoneType  String   @unique
   data       Json
 
-  stones     BuildStone[]
+  stone     BuildStone[]
 }
 
 model BuildStone {
-  id               String           @id @default(uuid())
-  buildEquipment   BuildEquipment?  @relation(fields: [buildEquipmentId], references: [id])
-  buildEquipmentId String?          
+  id               String          @id @default(uuid())
+  buildEquipment   BuildEquipment   @relation(fields: [buildEquipmentId], references: [id])
+  buildEquipmentId String          @unique  // <-- adiciona @unique aqui
 
-  base             StoneBase        @relation(fields: [baseId], references: [id])
+  base             StoneBase       @relation(fields: [baseId], references: [id])
   baseId           String
 
   dataOverride     Json?
 
   @@index([buildEquipmentId])
 }
+
 
 model BuildStatus {
   id                          String  @id @default(uuid())

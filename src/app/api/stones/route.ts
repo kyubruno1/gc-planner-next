@@ -8,7 +8,7 @@ export async function GET() {
 
     return NextResponse.json(stones);
   } catch (error) {
-    console.error("[API /api/stones] Erro ao buscar pedras:", error);
+    console.error("[API /api/stone] Erro ao buscar pedras:", error);
     return new NextResponse("Erro ao buscar pedras", { status: 500 });
   }
 }

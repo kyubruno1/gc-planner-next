@@ -1,79 +1,97 @@
 "use client";
 
 import { useEquip } from "@/context/EquipContext";
-import { itemGrades } from "@/utils/ItemNames";
-import { statusLabels } from "@/utils/statusLabels";
+import { gradeColors, itemGrades, itemNames, slotNames } from "@/utils/ItemNames";
+import { formatStatValue, statusLabels } from "@/utils/statusLabels";
 
 export function EquipOverview() {
   const { equipped } = useEquip();
 
   return (
-    <div className="text-white p-4 space-y-4 col-span-3 overflow-auto max-h-[600px]">
-      {Object.entries(equipped).map(([slot, item]) => (
-        <div key={slot} className="border p-2 rounded bg-gray-900">
-          <h3 className="text-lg font-bold">SLOT: {slot}</h3>
-          <p>Equipped: {item.name}</p>
+    <div className="text-white p-4 space-y-6 col-span-3">
+      <h2 className="text-xl font-semibold">Bônus de Set Ativos:</h2>
 
-          {/* Cards */}
-          <p>
-            Cards:{" "}
-            {item.cards && item.cards.length > 0 ? (
-              item.cards.map((card, i) => (
-                <span key={i}>
-                  {card.name}
-                  {i < item.cards.length - 1 ? ", " : ""}
-                </span>
-              ))
-            ) : (
-              "Nenhuma"
-            )}
-          </p>
+      {Object.entries(equipped).map(([slot, item]) => {
+        const slotLabel = slotNames[slot] || slot;
+        const itemLabel = itemNames[item.name] || item.name;
+        const itemColor = gradeColors[item.grade] || "text-white";
 
-          {/* Props selecionadas */}
-          <div>
-            <p>Props Selecionadas:</p>
-            {item.selectedProps ? (
-              <ul className="ml-4 list-disc">
-                {Object.entries(item.selectedProps).map(([key, val]) => {
-                  if (
-                    typeof val === "object" &&
-                    val !== null &&
-                    "min" in val &&
-                    "max" in val
-                  ) {
+        return (
+          <div
+            key={slot}
+            className="p-5 mx-auto rounded-[10px] border-4 shadow-dark-blue bg-bghovermodal border-primary space-y-2"
+          >
+            <div className={`text-xl font-bold mb-2 text-shadow-title ${itemColor}`}>
+              {itemLabel}
+            </div>
+
+            {/* Cartas */}
+            <div>
+              <p className="text-gray-200 font-semibold">Cartas:</p>
+              <div className="ml-4 text-white">
+                {item.cards && item.cards.length > 0 ? (
+                  item.cards.map((card) => card.name).join(" - ")
+                ) : (
+                  <span className="text-gray-400">Nenhuma</span>
+                )}
+              </div>
+            </div>
+
+            {/* Props */}
+            <div>
+              <p className="text-gray-200 font-semibold">Propriedades Selecionadas:</p>
+              {item.selectedProps ? (
+                <ul className="ml-4 list-disc">
+                  {Object.entries(item.selectedProps).map(([key, val]) => {
+                    const label = statusLabels[key] || key;
+
+                    if (
+                      typeof val === "object" &&
+                      val !== null &&
+                      "min" in val &&
+                      "max" in val
+                    ) {
+                      const displayValue =
+                        val.min === val.max
+                          ? formatStatValue(key, val.min)
+                          : `${formatStatValue(key, val.min)} ~ ${formatStatValue(key, val.max)}`;
+
+                      return <li key={key}>{label}: {displayValue}</li>;
+                    }
+
                     return (
                       <li key={key}>
-                        {key}: {val.min} - {val.max}
+                        {label}: {formatStatValue(key, val)}
                       </li>
                     );
-                  }
+                  })}
+                </ul>
+              ) : (
+                <div className="ml-4 text-gray-400">Nenhuma</div>
+              )}
+            </div>
 
-                  return (
-                    <li key={key}>
-                      {key}: {val}
-                    </li>
-                  );
-                })}
-              </ul>
-            ) : (
-              <p className="ml-4">Nenhuma</p>
-            )}
+            {/* Pedra */}
+            <div>
+              <p className="text-gray-200 font-semibold">Pedra:</p>
+              <div className="ml-4">
+                {item.stone ? (
+                  <>
+                    <span className={gradeColors[item.stone.stone]}>
+                      {itemGrades[item.stone.stone]}
+                    </span>{" "}
+                    +{item.stone.displayValue} (
+                    +{formatStatValue(item.stone.statusType, item.stone.value)}{" "}
+                    {statusLabels[item.stone.statusType] || item.stone.statusType})
+                  </>
+                ) : (
+                  <span className="text-gray-400">Nenhuma</span>
+                )}
+              </div>
+            </div>
           </div>
-
-          {/* Pedra */}
-          <p>
-            Pedra:{" "}
-            {item.stone ? (
-              <>
-                {itemGrades[item.stone.stone]} (+{item.stone.displayValue}) (
-                +{item.stone.value} {statusLabels[item.stone.statusType]})
-              </>
-            ) : (
-              "Nenhuma"
-            )}
-          </p>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }

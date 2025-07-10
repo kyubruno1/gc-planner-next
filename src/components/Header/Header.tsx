@@ -18,7 +18,7 @@ export function Header() {
 
   return (
     <nav>
-      <ul className="flex gap-5">
+      <ul className="flex gap-2 px-5 mb-[-5px] mt-4">
         {navLinks.map(({ href, label }) => {
           const isActive = pathname === href;
 

@@ -27,7 +27,7 @@ export function SavedCharactersModal({ onClose }: SavedCharactersModalProps) {
   const [loadingId, setLoadingId] = useState<string | null>(null);
 
   function handleLoadCharacter(sc: any) {
-
+    console.log(sc)
     setFullEquip(sc)
     setSelectedCharacter(sc.character);
     setSelectedJobKey(sc.jobKey);

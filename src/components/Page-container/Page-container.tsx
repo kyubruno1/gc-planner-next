@@ -16,7 +16,7 @@ export function PageContainer({ children, layoutType = 'light', onClick }: PageC
   // const classes = `${baseClasses} ${layoutType === 'dark' ? darkClasses : lightClasses}`;
 
   return (
-    <div className='gap-5 p-5 grid grid-cols-[auto_1400px_auto]'>
+    <div className='gap-5 p-5 grid grid-cols-[1fr_1200px_1fr]'>
       {/* <div className={classes} onClick={onClick}> */}
       {children}
       {/* </div> */}

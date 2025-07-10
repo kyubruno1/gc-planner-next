@@ -134,25 +134,26 @@ export function EquipProvider({ children }: { children: ReactNode }) {
           };
         }).filter(Boolean);
 
+
+        console.log('eq', eq)
         // Mapear as pedras do formato bruto para o formato esperado pelo frontend
-        const mappedStones = (eq.stones || []).map((stone: any) => {
-          const d = stone.dataOverride || {};
-          return {
-            stoneType: d.effect || "normal", // renomeado para stoneType para clareza
-            displayValue: d.displayValue,
-            value: d.value || 0,
-            effectValueIndex: d.effectValueIndex,
-            effectValueType: d.effectValueType,
-            automaticEffects: d.automaticEffects || [],
-            statusType: d.statusType,
-          };
-        });
+        const stone = eq.stone?.dataOverride
+          ? {
+            stoneType: eq.stone.dataOverride.effect || "normal",
+            displayValue: eq.stone.dataOverride.displayValue,
+            value: eq.stone.dataOverride.value || 0,
+            effectValueIndex: eq.stone.dataOverride.effectValueIndex,
+            effectValueType: eq.stone.dataOverride.effectValueType,
+            automaticEffects: eq.stone.dataOverride.automaticEffects || [],
+            statusType: eq.stone.dataOverride.statusType,
+          }
+          : undefined;
 
         newEquipped[slot] = {
           ...base,
           selectedProps: eq.propsOverride || {},
           cards: cardsWithEffects,
-          stones: mappedStones,
+          stone,
         };
       }
 
@@ -323,6 +324,7 @@ export function EquipProvider({ children }: { children: ReactNode }) {
       const item = prev[slot];
       if (!item) return prev;
 
+
       // Usar stones (array) para permitir múltiplas pedras
       // Mas aqui só altera uma pedra simples (exemplo)
       // Se usar array, adapte conforme necessário
@@ -330,7 +332,7 @@ export function EquipProvider({ children }: { children: ReactNode }) {
         ...prev,
         [slot]: {
           ...item,
-          stones: [stone], // substitui pedras por uma só; ajuste se necessário
+          stone, // substitui pedras por uma só; ajuste se necessário
         },
       };
     });
@@ -341,7 +343,7 @@ export function EquipProvider({ children }: { children: ReactNode }) {
       const item = prev[slot];
       if (!item) return prev;
 
-      const { stones, ...rest } = item;
+      const { stone, ...rest } = item;
       return {
         ...prev,
         [slot]: rest,
