@@ -2,7 +2,6 @@ import { Effect, StoneType } from "../../types/stones";
 
 export interface StonesModalProps {
   onClose: () => void;
-  rarity: "normal" | "epic" | "ancient";
   isAncient: boolean;
   slotName: string;
   initialValue?: {
@@ -10,7 +9,7 @@ export interface StonesModalProps {
     value: number;
     effect?: string;
     effectValueIndex?: number;
-  };  
+  };
   onApply: (
     slotName: string,
     data: {
@@ -25,6 +24,7 @@ export interface StonesModalProps {
       statusType: string;
     }
   ) => void;
+  stoneData: StoneDataItem[];
 }
 
 export interface StoneSlotData {
@@ -38,7 +38,7 @@ export interface StoneSlotData {
 }
 
 export interface StoneDataItem {
-  stone: "normal" | "epic";
+  stoneType: "normal" | "epic";
   data: {
     [slotName: string]: StoneSlotData;
   };

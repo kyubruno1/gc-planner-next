@@ -139,5 +139,775 @@
         }
       ]
     }
+  },
+  {
+    "name": "lass",
+    "img": "/assets/images/characters/select-characters/lass.png",
+    "qtJobs": 4,
+    "jobs": {
+      "first_job": [
+        {
+          "name": "crit_chance",
+          "value": 1.0
+        },
+        {
+          "name": "crit_damage",
+          "value": 2.50
+        }
+      ],
+      "second_job": [
+        {
+          "name": "crit_chance",
+          "value": 1.0
+        },
+        {
+          "name": "crit_damage",
+          "value": 2.50
+        }
+      ],
+      "third_job": [
+        {
+          "name": "crit_chance",
+          "value": 1.0
+        },
+        {
+          "name": "crit_damage",
+          "value": 2.50
+        }
+      ],
+      "forth_job": [
+        {
+          "name": "crit_chance",
+          "value": 1.0
+        },
+        {
+          "name": "crit_damage",
+          "value": 2.50
+        }
+      ]
+    }
+  },
+  {
+    "name": "ryan",
+    "img": "/assets/images/characters/select-characters/ryan.png",
+    "qtJobs": 4,
+    "jobs": {
+      "first_job": [
+        {
+          "name": "hp",
+          "value": 20
+        },
+        {
+          "name": "back_attack",
+          "value": 3.75
+        }
+      ],
+      "second_job": [
+        {
+          "name": "hp",
+          "value": 30
+        },
+        {
+          "name": "back_attack",
+          "value": 3.75
+        }
+      ],
+      "third_job": [
+        {
+          "name": "hp",
+          "value": 40
+        },
+        {
+          "name": "back_attack",
+          "value": 3.75
+        }
+      ],
+      "forth_job": [
+        {
+          "name": "hp",
+          "value": 50
+        },
+        {
+          "name": "back_attack",
+          "value": 3.75
+        }
+      ]
+    }
+  },
+  {
+    "name": "ronan",
+    "img": "/assets/images/characters/select-characters/ronan.png",
+    "qtJobs": 4,
+    "jobs": {
+      "first_job": [
+        {
+          "name": "sp_attack",
+          "value": 20
+        },
+        {
+          "name": "sp_def",
+          "value": 30
+        }
+      ],
+      "second_job": [
+        {
+          "name": "sp_attack",
+          "value": 30
+        },
+        {
+          "name": "sp_def",
+          "value": 40
+        }
+      ],
+      "third_job": [
+        {
+          "name": "sp_attack",
+          "value": 40
+        },
+        {
+          "name": "sp_def",
+          "value": 50
+        }
+      ],
+      "forth_job": [
+        {
+          "name": "sp_attack",
+          "value": 50
+        },
+        {
+          "name": "sp_def",
+          "value": 60
+        }
+      ]
+    }
+  },
+  {
+    "name": "amy",
+    "img": "/assets/images/characters/select-characters/amy.png",
+    "qtJobs": 4,
+    "jobs": {
+      "first_job": [
+        {
+          "name": "hp",
+          "value": 20
+        },
+        {
+          "name": "back_attack",
+          "value": 3.75
+        }
+      ],
+      "second_job": [
+        {
+          "name": "hp",
+          "value": 30
+        },
+        {
+          "name": "back_attack",
+          "value": 3.75
+        }
+      ],
+      "third_job": [
+        {
+          "name": "hp",
+          "value": 40
+        },
+        {
+          "name": "back_attack",
+          "value": 3.75
+        }
+      ],
+      "forth_job": [
+        {
+          "name": "hp",
+          "value": 50
+        },
+        {
+          "name": "back_attack",
+          "value": 3.75
+        }
+      ]
+    }
+  },
+  {
+    "name": "jin",
+    "img": "/assets/images/characters/select-characters/jin.png",
+    "qtJobs": 4,
+    "jobs": {
+      "first_job": [
+        {
+          "name": "crit_chance",
+          "value": 1.0
+        },
+        {
+          "name": "defense",
+          "value": 30
+        }
+      ],
+      "second_job": [
+        {
+          "name": "crit_chance",
+          "value": 1.0
+        },
+        {
+          "name": "defense",
+          "value": 40
+        }
+      ],
+      "third_job": [
+        {
+          "name": "crit_chance",
+          "value": 1.0
+        },
+        {
+          "name": "defense",
+          "value": 50
+        }
+      ],
+      "forth_job": [
+        {
+          "name": "crit_chance",
+          "value": 1.0
+        },
+        {
+          "name": "defense",
+          "value": 60
+        }
+      ]
+    }
+  },
+  {
+    "name": "sieghart",
+    "img": "/assets/images/characters/select-characters/sieghart.png",
+    "qtJobs": 4,
+    "jobs": {
+      "first_job": [
+        {
+          "name": "crit_damage",
+          "value": 2.5
+        },
+        {
+          "name": "attack",
+          "value": 20
+        }
+      ],
+      "second_job": [
+        {
+          "name": "crit_damage",
+          "value": 2.5
+        },
+        {
+          "name": "attack",
+          "value": 30
+        }
+      ],
+      "third_job": [
+        {
+          "name": "crit_damage",
+          "value": 2.5
+        },
+        {
+          "name": "attack",
+          "value": 40
+        }
+      ],
+      "forth_job": [
+        {
+          "name": "crit_damage",
+          "value": 2.5
+        },
+        {
+          "name": "attack",
+          "value": 50
+        }
+      ]
+    }
+  },
+  {
+    "name": "mari",
+    "img": "/assets/images/characters/select-characters/mari.png",
+    "qtJobs": 4,
+    "jobs": {
+      "first_job": [
+        {
+          "name": "sp_attack",
+          "value": 20
+        },
+        {
+          "name": "sp_def",
+          "value": 30
+        }
+      ],
+      "second_job": [
+        {
+          "name": "sp_attack",
+          "value": 30
+        },
+        {
+          "name": "sp_def",
+          "value": 40
+        }
+      ],
+      "third_job": [
+        {
+          "name": "sp_attack",
+          "value": 40
+        },
+        {
+          "name": "sp_def",
+          "value": 50
+        }
+      ],
+      "forth_job": [
+        {
+          "name": "sp_attack",
+          "value": 50
+        },
+        {
+          "name": "sp_def",
+          "value": 60
+        }
+      ]
+    }
+  },
+  {
+    "name": "dio",
+    "img": "/assets/images/characters/select-characters/dio.png",
+    "qtJobs": 4,
+    "jobs": {
+      "first_job": [
+        {
+          "name": "crit_damage",
+          "value": 2.5
+        },
+        {
+          "name": "attack",
+          "value": 20
+        }
+      ],
+      "second_job": [
+        {
+          "name": "crit_damage",
+          "value": 2.5
+        },
+        {
+          "name": "attack",
+          "value": 30
+        }
+      ],
+      "third_job": [
+        {
+          "name": "crit_damage",
+          "value": 2.5
+        },
+        {
+          "name": "attack",
+          "value": 40
+        }
+      ],
+      "forth_job": [
+        {
+          "name": "crit_damage",
+          "value": 2.5
+        },
+        {
+          "name": "attack",
+          "value": 50
+        }
+      ]
+    }
+  },
+  {
+    "name": "zero",
+    "img": "/assets/images/characters/select-characters/zero.png",
+    "qtJobs": 4,
+    "jobs": {
+      "first_job": [
+        {
+          "name": "defense",
+          "value": 30
+        },
+        {
+          "name": "attack",
+          "value": 20
+        }
+      ],
+      "second_job": [
+        {
+          "name": "defense",
+          "value": 40
+        },
+        {
+          "name": "attack",
+          "value": 30
+        }
+      ],
+      "third_job": [
+        {
+          "name": "defense",
+          "value": 50
+        },
+        {
+          "name": "attack",
+          "value": 40
+        }
+      ],
+      "forth_job": [
+        {
+          "name": "defense",
+          "value": 60
+        },
+        {
+          "name": "attack",
+          "value": 50
+        }
+      ]
+    }
+  },
+  {
+    "name": "rey",
+    "img": "/assets/images/characters/select-characters/rey.png",
+    "qtJobs": 4,
+    "jobs": {
+      "first_job": [
+        {
+          "name": "crit_damage",
+          "value": 2.5
+        },
+        {
+          "name": "sp_attack",
+          "value": 20
+        }
+      ],
+      "second_job": [
+        {
+          "name": "crit_damage",
+          "value": 2.5
+        },
+        {
+          "name": "sp_attack",
+          "value": 30
+        }
+      ],
+      "third_job": [
+        {
+          "name": "crit_damage",
+          "value": 2.5
+        },
+        {
+          "name": "sp_attack",
+          "value": 40
+        }
+      ],
+      "forth_job": [
+        {
+          "name": "crit_damage",
+          "value": 2.5
+        },
+        {
+          "name": "sp_attack",
+          "value": 50
+        }
+      ]
+    }
+  },
+  {
+    "name": "lupus",
+    "img": "/assets/images/characters/select-characters/lupus.png",
+    "qtJobs": 4,
+    "jobs": {
+      "first_job": [
+        {
+          "name": "crit_chance",
+          "value": 1.0
+        },
+        {
+          "name": "crit_resistance",
+          "value": 5.0
+        }
+      ],
+      "second_job": [
+        {
+          "name": "crit_chance",
+          "value": 1.0
+        },
+        {
+          "name": "crit_resistance",
+          "value": 5.0
+        }
+      ],
+      "third_job": [
+        {
+          "name": "crit_chance",
+          "value": 1.0
+        },
+        {
+          "name": "crit_resistance",
+          "value": 5.0
+        }
+      ],
+      "forth_job": [
+        {
+          "name": "crit_chance",
+          "value": 1.0
+        },
+        {
+          "name": "crit_resistance",
+          "value": 5.0
+        }
+      ]
+    }
+  },
+  {
+    "name": "lin",
+    "img": "/assets/images/characters/select-characters/lin.png",
+    "qtJobs": 4,
+    "jobs": {
+      "first_job": [
+        {
+          "name": "hp",
+          "value": 20
+        },
+        {
+          "name": "sp_attack",
+          "value": 20
+        }
+      ],
+      "second_job": [
+        {
+          "name": "hp",
+          "value": 30
+        },
+        {
+          "name": "sp_attack",
+          "value": 30
+        }
+      ],
+      "third_job": [
+        {
+          "name": "hp",
+          "value": 40
+        },
+        {
+          "name": "sp_attack",
+          "value": 40
+        }
+      ],
+      "forth_job": [
+        {
+          "name": "hp",
+          "value": 50
+        },
+        {
+          "name": "sp_attack",
+          "value": 50
+        }
+      ]
+    }
+  },
+  {
+    "name": "azin",
+    "img": "/assets/images/characters/select-characters/azin.png",
+    "qtJobs": 4,
+    "jobs": {
+      "first_job": [
+        {
+          "name": "crit_resistance",
+          "value": 10
+        },
+        {
+          "name": "attack",
+          "value": 20
+        }
+      ],
+      "second_job": [
+        {
+          "name": "crit_resistance",
+          "value": 10
+        },
+        {
+          "name": "attack",
+          "value": 30
+        }
+      ]
+    }
+  },
+  {
+    "name": "holy",
+    "img": "/assets/images/characters/select-characters/holy.png",
+    "qtJobs": 4,
+    "jobs": {
+      "first_job": [
+        {
+          "name": "hp",
+          "value": 20
+        },
+        {
+          "name": "defense",
+          "value": 30
+        }
+      ],
+      "second_job": [
+        {
+          "name": "hp",
+          "value": 30
+        },
+        {
+          "name": "defense",
+          "value": 40
+        }
+      ]
+    }
+  },
+  {
+    "name": "edel",
+    "img": "/assets/images/characters/select-characters/edel.png",
+    "qtJobs": 4,
+    "jobs": {
+      "first_job": [
+        {
+          "name": "crit_chance",
+          "value": 1.0
+        },
+        {
+          "name": "attack",
+          "value": 20
+        }
+      ],
+      "second_job": [
+        {
+          "name": "crit_chance",
+          "value": 1.0
+        },
+        {
+          "name": "attack",
+          "value": 10
+        }
+      ]
+    }
+  },
+  {
+    "name": "veigas",
+    "img": "/assets/images/characters/select-characters/veigas.png",
+    "qtJobs": 4,
+    "jobs": {
+      "first_job": [
+        {
+          "name": "crit_damage",
+          "value": 2.5
+        },
+        {
+          "name": "sp_attack",
+          "value": 20
+        }
+      ]
+    }
+  },
+  {
+    "name": "ai",
+    "img": "/assets/images/characters/select-characters/ai.png",
+    "qtJobs": 4,
+    "jobs": {
+      "first_job": [
+        {
+          "name": "crit_damage",
+          "value": 2.5
+        },
+        {
+          "name": "attack",
+          "value": 20
+        }
+      ],
+      "second_job": [
+        {
+          "name": "crit_damage",
+          "value": 2.5
+        },
+        {
+          "name": "attack",
+          "value": 20
+        }
+      ]
+    }
+  },
+  {
+    "name": "decane",
+    "img": "/assets/images/characters/select-characters/decane.png",
+    "qtJobs": 4,
+    "jobs": {
+      "first_job": [
+        {
+          "name": "crit_chance",
+          "value": 1.0
+        },
+        {
+          "name": "attack",
+          "value": 20
+        }
+      ],
+      "second_job": [
+        {
+          "name": "crit_chance",
+          "value": 1.0
+        },
+        {
+          "name": "attack",
+          "value": 10
+        }
+      ]
+    }
+  },
+  {
+    "name": "kallia",
+    "img": "/assets/images/characters/select-characters/kallia.png",
+    "qtJobs": 4,
+    "jobs": {
+      "first_job": [
+        {
+          "name": "back_attack",
+          "value": 3.75
+        },
+        {
+          "name": "attack",
+          "value": 20
+        }
+      ],
+      "second_job": [
+        {
+          "name": "back_attack",
+          "value": 3.75
+        },
+        {
+          "name": "attack",
+          "value": 30
+        }
+      ]
+    }
+  },
+  {
+    "name": "uno",
+    "img": "/assets/images/characters/select-characters/uno.png",
+    "qtJobs": 4,
+    "jobs": {
+      "first_job": [
+        {
+          "name": "hp",
+          "value": 20
+        },
+        {
+          "name": "attack",
+          "value": 20
+        }
+      ],
+      "second_job": [
+        {
+          "name": "hp",
+          "value": 30
+        },
+        {
+          "name": "attack",
+          "value": 30
+        }
+      ]
+    }
   }
 ]

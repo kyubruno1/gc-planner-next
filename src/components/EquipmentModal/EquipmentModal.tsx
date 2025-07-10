@@ -5,15 +5,14 @@ import { formatStatValue, statusLabels } from "@/utils/statusLabels";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { BaseModal } from "../BaseModal/BaseModal";
+import { SkeletonGridLoader } from "../SkeletonGridLoader/SkeletonGridLoader";
 import type { EquipmentModalProps, Item } from "./EquipmentModal.types";
 
-export function EquipmentModal({ type, equipmentType, onSelectItem, onClose }: EquipmentModalProps) {
+
+export function EquipmentModal({ type, equipmentType, slotType, onSelectItem, onClose }: EquipmentModalProps) {
   const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedLevelMap, setSelectedLevelMap] = useState<Record<string, number>>({});
-
-  console.log(type)
-  console.log(equipmentType)
 
   useEffect(() => {
     async function loadItems() {
@@ -55,11 +54,17 @@ export function EquipmentModal({ type, equipmentType, onSelectItem, onClose }: E
 
   if (loading) {
     return (
-      <BaseModal onClose={onClose} maxWidth="62.5rem" title={slotNames[type] ?? type} titleColor="text-purple-500">
-        <div className="text-center p-6 text-white">Carregando itens...</div>
-      </BaseModal>
+      <SkeletonGridLoader
+        onClose={onClose}
+        title={slotNames[type] ?? type}
+        items={items.length || 3}
+        cols={3}
+        titleColor="text-purple-500"
+        className="bg-bgdarkblue"
+      />
     );
   }
+
 
   return (
     <BaseModal onClose={onClose} maxWidth="62.5rem" title={slotNames[type] ?? type} titleColor="text-purple-500">
@@ -76,7 +81,7 @@ export function EquipmentModal({ type, equipmentType, onSelectItem, onClose }: E
                 onClick={() => {
                   const selectedItem = { ...itemWithLevel };
 
-                  if (equipmentType !== "equip" && itemWithLevel.props) {
+                  if (slotType !== "equip" && itemWithLevel.props) {
                     selectedItem.selectedProps = {};
 
                     Object.entries(itemWithLevel.props).forEach(([key, value]) => {
@@ -102,8 +107,8 @@ export function EquipmentModal({ type, equipmentType, onSelectItem, onClose }: E
                     src={item.img}
                     alt={item.name}
                     className="rounded-lg"
-                    fill
-                    sizes="256px"
+                    width={256}
+                    height={256}
                     style={{ objectFit: "cover" }}
                     priority={false}
                   />
@@ -127,7 +132,7 @@ export function EquipmentModal({ type, equipmentType, onSelectItem, onClose }: E
                   </div>
                 )}
 
-                {equipmentType === "equip" ? (
+                {slotType === "equip" ? (
                   <>
                     <p className="text-lg text-primary mt-2 space-y-1">Status base</p>
                     <div className="text-sm text-white mt-2 space-y-1">

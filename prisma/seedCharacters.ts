@@ -4,18 +4,25 @@ import { readFile } from "fs/promises";
 const prisma = new PrismaClient();
 
 export async function seedCharacters() {
-  // Lê o arquivo JSON
   const rawData = await readFile("./prisma/data/characters.json", "utf-8");
   const characters = JSON.parse(rawData);
 
-  console.log("Personagens do JSON:", characters);
+  // console.log("Personagens do JSON:", characters);
 
   for (const char of characters) {
+    const existing = await prisma.character.findUnique({
+      where: { name: char.name },
+    });
+
+    if (existing) {
+      console.log(`Personagem "${char.name}" já existe. Pulando...`);
+      continue;
+    }
+
     console.log(`Criando personagem: ${char.name}`);
 
-    // Prepara os jobs para criar
     const jobsData = Object.values(char.jobs).map((job: any) => ({
-      name: job.name || job[0]?.name || "Job", // fallback
+      name: job.name || job[0]?.name || "Job",
       statuses: {
         create: job.map((status: any) => ({
           name: status.name,
@@ -36,7 +43,6 @@ export async function seedCharacters() {
     });
   }
 
-  // Busca tudo do banco e imprime para confirmar
   const allChars = await prisma.character.findMany({
     include: {
       jobs: {
@@ -48,5 +54,5 @@ export async function seedCharacters() {
     },
   });
 
-  console.log("Personagens no banco:", JSON.stringify(allChars, null, 2));
+  // console.log("Personagens no banco:", allChars);
 }

@@ -1,0 +1,153 @@
+[
+  {
+    "bonusType": "berkas_epic",
+    "name": "Conjunto do Dragão de Ferro",
+    "setPieces": [
+      "berkas_epic_helmet", 
+      "berkas_epic_upper_armor", 
+      "berkas_epic_lower_armor", 
+      "berkas_epic_gloves", 
+      "berkas_epic_shoes",
+      "berkas_epic_mantle",
+      "berkas_epic_upper_head",
+      "berkas_epic_lower_head",
+      "berkas_epic_upper_back",
+      "berkas_epic_lower_back",
+      "berkas_epic_arms",
+      "berkas_epic_weapon"
+    ],
+    "2": {
+      "defense": 137
+    },
+    "3": {
+      "attack": 83
+    },
+    "4": {
+      "hp": 137
+    },
+    "5": {  
+      "sp_def": 455
+    },
+    "6": {
+      "mp_absorption": 1783
+    },
+    "7": {
+      "hp_rec": 14.00
+    },
+    "8": {
+      "mp_counter_attack": -20.60
+    },
+    "9": {
+      "mp_rec": 14.00
+    },
+    "10": {
+      "hp_absorption": 1783
+    },
+    "11": {
+      "crit_chance": 3.64
+    },
+    "12": {
+      "sp_attack": 272
+    }
+  },
+  {
+    "bonusType": "berkas_legendary",
+    "name": "Conjunto do Verdadeiro Dragão de Ferro",
+    "setPieces": [
+      "berkas_legendary_helmet", 
+      "berkas_legendary_upper_armor", 
+      "berkas_legendary_lower_armor", 
+      "berkas_legendary_gloves", 
+      "berkas_legendary_shoes",
+      "berkas_legendary_mantle",
+      "berkas_legendary_upper_head",
+      "berkas_legendary_lower_head",
+      "berkas_legendary_upper_back",
+      "berkas_legendary_lower_back",
+      "berkas_legendary_arms",
+      "berkas_legendary_weapon"
+    ],
+    "2": {
+      "defense": 141
+    },
+    "3": {
+      "attack": 85
+    },
+    "4": {
+      "hp": 141
+    },
+    "5": {  
+      "sp_def": 470
+    },
+    "6": {
+      "mp_absorption": 1783
+    },
+    "7": {
+      "hp_rec": 14.50
+    },
+    "8": {
+      "mp_absorption": 99999999999
+    },
+    "9": {
+      "mp_rec": 14.50
+    },
+    "10": {
+      "mp_absorption": 99999999999
+    },
+    "11": {
+      "crit_chance": 3.68
+    },
+    "12": {
+      "sp_attack": 282
+    }
+  },
+  {
+    "bonusType": "dimensional_guardian_epic",
+    "name": "Conjunto dos Guardiões Dimensionais",
+    "setPieces": [
+      "dimensional_guardian_epic_helmet", 
+      "dimensional_guardian_epic_upper_armor", 
+      "dimensional_guardian_epic_lower_armor", 
+      "dimensional_guardian_epic_gloves", 
+      "dimensional_guardian_epic_shoes",
+      "dimensional_guardian_epic_mantle",
+      "dimensional_guardian_epic_upper_head",
+      "dimensional_guardian_epic_lower_head",
+      "dimensional_guardian_epic_upper_back",
+      "dimensional_guardian_epic_lower_back",
+      "dimensional_guardian_epic_arms",
+      "dimensional_guardian_epic_weapon"
+    ],
+    "2": {
+      "taint_resistance": 2.00
+    },
+    "3": {
+      "taint_resistance": 2.00
+    },
+    "4": {
+      "taint_resistance": 2.00
+    },
+    "5": {  
+      "taint_resistance": 2.00
+    },
+    "6": {
+      "taint_resistance": 2.00
+    },
+    "7": {
+      "taint_resistance": 2.00
+    },
+    "8": {
+      "taint_resistance": 2.00
+    },
+    "9": {
+      "taint_resistance": 2.00
+    },
+    "10": {
+      "taint_resistance": 2.00
+    },
+    "11": {
+      "taint_resistance": 2.00
+    }
+  }
+
+]

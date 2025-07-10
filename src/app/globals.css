@@ -1,10 +1,10 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-
 @theme {
   --color-primary: #a1b8ce;
   --color-textLightBlue: #AAE1FF;
+  --color-bghovermodal: #2D3649;
   --color-lightgray: #f0f0f0;
   --color-bgdarkblue: #566a8f;
   --color-bgtextdark: #4d5d81;

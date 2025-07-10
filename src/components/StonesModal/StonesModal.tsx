@@ -1,20 +1,15 @@
-// import { Tippy } from "tippy.js";
-import { statusLabels } from "@/utils/statusLabels";
+import Tippy from "@tippyjs/react";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import "tippy.js/dist/tippy.css";
+
+import { statusLabels } from "@/utils/statusLabels";
+import Image from "next/image";
 import { Effect, StoneType } from "../../types/stones";
 import { BaseModal } from "../BaseModal/BaseModal";
 import { StonesModalProps } from "./StonesModal.types";
 
-export function StonesModal({
-  onClose,
-  isAncient,
-  slotName,
-  initialValue,
-  onApply,
-  stoneData, // recebe os dados aqui!
-}: StonesModalProps) {
+export function StonesModal({ onClose, isAncient, slotName, initialValue, onApply, stoneData }: StonesModalProps) {
   const [showStones, setShowStones] = useState(true);
   const [activeStone, setActiveStone] = useState<StoneType | null>(
     initialValue?.stone || null
@@ -30,8 +25,9 @@ export function StonesModal({
   );
 
   const currentStoneData = activeStone
-    ? stoneData.find((s) => s.stone === activeStone)
+    ? stoneData.find((s) => s.stoneType === activeStone)
     : null;
+
 
   const stoneInfo = currentStoneData?.data[slotName];
 
@@ -69,10 +65,11 @@ export function StonesModal({
     if (activeStone === "epic" && !selectedEffect) {
       toast.error("Selecione um efeito especial para a pedra épica.", {
         icon: (
-          <img
+          <Image
             src="/assets/images/system/elena-fail.png"
             alt="Falha"
-            className="w-6 h-6"
+            width={24}
+            height={24}
           />
         ),
       });
@@ -89,10 +86,11 @@ export function StonesModal({
     if (!stoneInfo?.type) {
       toast.error("Tipo da pedra não definido!", {
         icon: (
-          <img
+          <Image
             src="/assets/images/system/elena-fail.png"
             alt="Falha"
-            className="w-6 h-6"
+            width={24}
+            height={24}
           />
         ),
       });
@@ -130,18 +128,21 @@ export function StonesModal({
   return (
     <BaseModal onClose={onClose} title="Pedra de fortificação" titleColor="text-purple-500">
       <div className="flex flex-col gap-4 items-center p-4">
-        <p className="textlightgray text-outline-lg">Escolha uma das pedras de fortificação.</p>
+        <p className="text-lightgray text-outline-lg">Escolha uma das pedras de fortificação.</p>
         {showStones && (
           <div className="flex gap-8 ">
             {/* Pedra Normal */}
             <div className="flex flex-col items-center bg-gradient-to-b from-bluecustom to-bgtextdark p-4 rounded-md shadow-bluecustom">
-              <img
+              <Image
                 src="/assets/images/system/normal_stone.png"
                 alt="Normal Stone"
-                className="cursor-pointer rounded-lg"
                 onClick={() => handleStoneClick("normal")}
+                unoptimized
+                width={80}
+                height={80}
+                className="w-auto h-auto cursor-pointer rounded-lg"
               />
-              <p className="textlightgray p-4 font-bold text-outline-lg text-xl">
+              <p className="text-lightgray p-4 font-bold text-outline-lg text-xl">
                 Pedra de Fortificação (normal)
               </p>
               {activeStone === "normal" && stoneInfo && (
@@ -166,11 +167,14 @@ export function StonesModal({
 
             {/* Pedra Épica */}
             <div className="flex flex-col items-center bg-gradient-to-b from-bluecustom to-bgtextdark p-4 rounded-md shadow-bluecustom">
-              <img
+              <Image
                 src="/assets/images/system/epic_stone.png"
                 alt="Epic Stone"
-                className="cursor-pointer rounded-lg"
+                className="w-auto h-auto cursor-pointer rounded-lg"
                 onClick={() => handleStoneClick("epic")}
+                unoptimized
+                width={80}
+                height={80}
               />
               <p className="text-gold p-4 font-bold text-outline-lg text-xl">
                 Pedra de Fortificação (Épica)
@@ -183,7 +187,7 @@ export function StonesModal({
                         <button
                           onClick={() => handleValueSelect(Number(key))}
                           className={`w-8 h-8 px-2 py-1 flex items-center justify-center border rounded transition transform duration-150 ease-in-out
-                ${stoneValueSelected === Number(key) && activeStone === "epic"
+                            ${stoneValueSelected === Number(key) && activeStone === "epic"
                               ? "bg-blue-300"
                               : "bg-white hover:bg-gray-200 hover:-translate-y-1"
                             }`}

@@ -74,8 +74,92 @@ export function EquipProvider({ children }: { children: ReactNode }) {
     fetchBonusSets();
   }, []);
 
-  function setFullEquip(newEquip: EquipState) {
-    setEquipped(newEquip);
+  async function setFullEquip(sc: any) {
+    const { equipments } = sc;
+
+    if (!equipments || !Array.isArray(equipments)) {
+      console.error("Equipamentos inválidos para montar fullEquip");
+      return;
+    }
+
+    const baseIds = equipments.map((eq) => eq.baseId);
+    const allCardsFromEquip = equipments.flatMap(eq => eq.cards || []);
+    const baseCardIds = allCardsFromEquip.map((card: any) => card.baseId).filter(Boolean);
+
+    if (baseIds.length === 0) return;
+
+    try {
+      // Buscar equipamentos base
+      const res = await fetch("/api/items", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ids: baseIds }),
+      });
+      if (!res.ok) {
+        console.error("Erro ao buscar equipamentos base");
+        return;
+      }
+      const equipmentBases = await res.json();
+
+      // Buscar cartas base
+      let cardBases: any[] = [];
+      if (baseCardIds.length > 0) {
+        const cardRes = await fetch("/api/cards/by-id", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ids: baseCardIds }),
+        });
+        if (cardRes.ok) {
+          cardBases = await cardRes.json();
+        } else {
+          console.error("Erro ao buscar cartas base");
+        }
+      }
+
+      const newEquipped: Record<string, EquippedItem> = {};
+
+      for (const eq of equipments) {
+        const base = equipmentBases.find((b: any) => b.id === eq.baseId);
+        if (!base) continue;
+
+        const slot = base.type;
+
+        const cardsWithEffects = (eq.cards || []).map((cardFromBuild: any) => {
+          const baseCard = cardBases.find((c) => c.id === cardFromBuild.baseId);
+          if (!baseCard) return null;
+
+          return {
+            ...baseCard,
+            effects: cardFromBuild.effectsOverride || baseCard.effects,
+          };
+        }).filter(Boolean);
+
+        // Mapear as pedras do formato bruto para o formato esperado pelo frontend
+        const mappedStones = (eq.stones || []).map((stone: any) => {
+          const d = stone.dataOverride || {};
+          return {
+            stoneType: d.effect || "normal", // renomeado para stoneType para clareza
+            displayValue: d.displayValue,
+            value: d.value || 0,
+            effectValueIndex: d.effectValueIndex,
+            effectValueType: d.effectValueType,
+            automaticEffects: d.automaticEffects || [],
+            statusType: d.statusType,
+          };
+        });
+
+        newEquipped[slot] = {
+          ...base,
+          selectedProps: eq.propsOverride || {},
+          cards: cardsWithEffects,
+          stones: mappedStones,
+        };
+      }
+
+      setEquipped(newEquipped);
+    } catch (error) {
+      console.error("Erro na função setFullEquip:", error);
+    }
   }
 
   function equipItem(item: EquippedItem) {
@@ -118,36 +202,35 @@ export function EquipProvider({ children }: { children: ReactNode }) {
     return result;
   }
 
-  function calculateBonusExtras(): Partial<CharacterStatus> {
+  function calculateBonusExtras(): Record<string, Record<string, number>> {
     if (loadingBonusSets || errorBonusSets) return {};
 
     const counts = countAllBonusTypes();
-    const bonusesByType: Record<string, Partial<CharacterStatus>> = {};
+    const bonusesByType: Record<string, Record<string, number>> = {};
 
     for (const bonusSet of bonusSets) {
-      const { bonusType, ...restBonuses } = bonusSet;
+      const { bonusType, bonuses } = bonusSet;
       const qty = counts[bonusType] || 0;
 
-      const bonusStats: Partial<CharacterStatus> = {};
+      if (!bonuses) continue;
 
-      for (const key in restBonuses) {
-        const minEquip = Number(key);
-        if (qty >= minEquip) {
-          const values = restBonuses[key];
-          for (const stat in values) {
-            bonusStats[stat as keyof CharacterStatus] =
-              (bonusStats[stat as keyof CharacterStatus] || 0) + values[stat];
-          }
+      for (const tierStr in bonuses) {
+        const tier = Number(tierStr);
+        if (isNaN(tier) || qty < tier) continue; // só aplica até o nível atingido
+
+        const tierBonuses = bonuses[tierStr];
+
+        for (const stat in tierBonuses) {
+          if (!bonusesByType[bonusType]) bonusesByType[bonusType] = {};
+          bonusesByType[bonusType][stat] =
+            (bonusesByType[bonusType][stat] || 0) + tierBonuses[stat];
         }
-      }
-
-      if (Object.keys(bonusStats).length > 0) {
-        bonusesByType[bonusType] = bonusStats;
       }
     }
 
     return bonusesByType;
   }
+
 
   function flattenBonusExtras(bonusesByType: Record<string, Partial<CharacterStatus>>): Partial<CharacterStatus> {
     const flatBonus: Partial<CharacterStatus> = {};
@@ -240,11 +323,14 @@ export function EquipProvider({ children }: { children: ReactNode }) {
       const item = prev[slot];
       if (!item) return prev;
 
+      // Usar stones (array) para permitir múltiplas pedras
+      // Mas aqui só altera uma pedra simples (exemplo)
+      // Se usar array, adapte conforme necessário
       return {
         ...prev,
         [slot]: {
           ...item,
-          stone,
+          stones: [stone], // substitui pedras por uma só; ajuste se necessário
         },
       };
     });
@@ -255,7 +341,7 @@ export function EquipProvider({ children }: { children: ReactNode }) {
       const item = prev[slot];
       if (!item) return prev;
 
-      const { stone, ...rest } = item;
+      const { stones, ...rest } = item;
       return {
         ...prev,
         [slot]: rest,

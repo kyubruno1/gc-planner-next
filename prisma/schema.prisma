@@ -18,14 +18,13 @@ model Build {
 
   equipments   BuildEquipment[]
   status       BuildStatus?
-  combinedSets CombinedSet[]
 
   @@index([characterId])
 }
 
 model Character {
   id        String   @id @default(uuid())
-  name      String
+  name      String   @unique
   img       String
   qtJobs    Int
   jobs      Job[]
@@ -94,8 +93,8 @@ model BuildEquipment {
   baseId        String
 
   propsOverride Json?
-  cards         Card[]
-  stones        Stone[]
+  cards         BuildCard[]
+  stones        BuildStone[]
 
   @@index([buildId])
   @@index([baseId])
@@ -109,10 +108,10 @@ model CardBase {
   img        String
   effects    Json
 
-  cards      Card[]
+  cards      BuildCard[]
 }
 
-model Card {
+model BuildCard {
   id               String           @id @default(uuid())
   buildEquipment   BuildEquipment?  @relation(fields: [buildEquipmentId], references: [id])
   buildEquipmentId String?          
@@ -127,13 +126,13 @@ model Card {
 
 model StoneBase {
   id         String   @id @default(uuid())
-  stoneType  String
+  stoneType  String   @unique
   data       Json
 
-  stones     Stone[]
+  stones     BuildStone[]
 }
 
-model Stone {
+model BuildStone {
   id               String           @id @default(uuid())
   buildEquipment   BuildEquipment?  @relation(fields: [buildEquipmentId], references: [id])
   buildEquipmentId String?          
@@ -158,7 +157,7 @@ model BuildStatus {
   sp_attack                   Int
   mp_rec                      Float
   hell_spear_chance           Float
-  hell_spear                  Float
+  hell_spear                  Int
   taint_resistance            Float
   defense                     Int
   hp                          Int
@@ -170,20 +169,10 @@ model BuildStatus {
   gp                          Float
 }
 
-model CombinedSet {
-  id        String              @id @default(uuid())
-  build     Build               @relation(fields: [buildId], references: [id])
-  buildId   String
-  setKey    String
-  effects   CombinedSetEffect[]
-
-  @@index([buildId])
-}
-
-model CombinedSetEffect {
-  id              String            @id @default(uuid())
-  combinedSet     CombinedSet       @relation(fields: [combinedSetId], references: [id])
-  combinedSetId   String
-  name            String
-  value           Float
+model BonusSetJson {
+  id         String   @id @default(uuid())
+  bonusType  String   @unique
+  name       String
+  setPieces  String[]
+  bonuses    Json     // chave = quantidade, valor = bônus parcial
 }

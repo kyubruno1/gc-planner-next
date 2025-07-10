@@ -1,0 +1,566 @@
+[
+  {
+    "stone": "epic",
+    "data": {
+      "helmet": {
+        "type": "defense",
+        "special_effects": {
+        "default": [
+          {
+            "name": "fortify_bonus",
+            "values": [20.0, 5.0],
+            "valueType": "percent"
+          },
+          {
+            "name": "protect_destruction",
+            "values": [20.0, 5.0],
+            "valueType": "percent"
+
+          }
+        ],
+        "ancient": [
+          {
+            "name": "attack",
+            "values": [600, 300],
+            "valueType": "flat"
+          },
+          {
+            "name": "crit_resistance",
+            "values": [20.0, 15.0],
+            "valueType": "percent"
+          }
+        ],
+        "18": [
+          {
+            "name": "crit_damage",
+            "values": [3.0],
+            "valueType": "percent"
+          }
+        ]
+      },
+        "0": 0,
+        "1": 130,
+        "2": 133,
+        "3": 155,
+        "4": 161,
+        "5": 169,
+        "6": 180,
+        "7": 193,
+        "8": 208,
+        "9": 227,
+        "10": 249,
+        "11": 273,
+        "12": 300,
+        "13": 329,
+        "14": 360,
+        "15": 391,
+        "16": 421,
+        "17": 450,
+        "18": 477
+      },
+      "upper-armor": {
+        "type": "defense",
+        "special_effects": {
+        "default": [
+          {
+            "name": "crit_resistance",
+            "values": [20.0, 15.0],
+            "valueType": "percent"
+          },
+          {
+            "name": "fatal_super_armor",
+            "values": [20],
+            "valueType": "flat"
+
+          }
+        ],
+        "ancient": [
+          {
+            "name": "sp_attack",
+            "values": [800, 400],
+            "valueType": "flat"
+          },
+          {
+            "name": "fatal_super_armor",
+            "values": [20],
+            "valueType": "flat"
+          }
+        ],
+        "18": [
+          {
+            "name": "crit_damage",
+            "values": [3.0],
+            "valueType": "percent"
+          }
+        ]
+      },
+        "0": 0,
+        "1": 152,
+        "2": 156,
+        "3": 161,
+        "4": 168,
+        "5": 178,
+        "6": 190,
+        "7": 202,
+        "8": 220,
+        "9": 242,
+        "10": 267,
+        "11": 296,
+        "12": 327,
+        "13": 361,
+        "14": 397,
+        "15": 433,
+        "16": 468,
+        "17": 502,
+        "18": 533
+      },
+      "lower-armor": {
+        "type": "defense",
+        "special_effects": {
+        "default": [
+          {
+            "name": "grab_resistance",
+            "values": [20.0, 15.0],
+            "valueType": "percent"
+          },
+          {
+            "name": "fatal_mp_rec",
+            "values": [20, 15],
+            "valueType": "percent"
+
+          }
+        ],
+        "ancient": [
+          {
+            "name": "mp_rec",
+            "values": [800, 400],
+            "valueType": "flat"
+          },
+          {
+            "name": "fatal_super_armor",
+            "values": [20],
+            "valueType": "flat"
+          }
+        ],
+        "18": [
+          {
+            "name": "crit_damage",
+            "values": [3.0],
+            "valueType": "percent"
+          }
+        ]
+      },
+        "0": 0,
+        "1": 152,
+        "2": 156,
+        "3": 161,
+        "4": 168,
+        "5": 178,
+        "6": 190,
+        "7": 202,
+        "8": 220,
+        "9": 242,
+        "10": 267,
+        "11": 296,
+        "12": 327,
+        "13": 361,
+        "14": 397,
+        "15": 433,
+        "16": 468,
+        "17": 502,
+        "18": 533
+      },
+      "gloves": {
+        "type": "attack",
+        "special_effects": {
+        "default": [
+          {
+            "name": "pet_mp_rec",
+            "values": [10.0, 7.0],
+            "valueType": "percent"
+          },
+          {
+            "name": "fatal_attack_up",
+            "values": [20.0, 15.0],
+            "valueType": "percent"
+
+          }
+        ],
+        "ancient": [
+          {
+            "name": "pet_mp_rec",
+            "values": [10.0, 7.0],
+            "valueType": "percent"
+          },
+          {
+           "name": "fatal_attack_up",
+            "values": [20.0, 15.0],
+            "valueType": "percent"
+          }
+        ],
+        "18": [
+          {
+            "name": "crit_damage",
+            "values": [3.0],
+            "valueType": "percent"
+          }
+        ]
+      },
+        "0": 0,
+        "1": 21,
+        "2": 29,
+        "3": 39,
+        "4": 52,
+        "5": 70,
+        "6": 92,
+        "7": 120,
+        "8": 155,
+        "9": 195,
+        "10": 242,
+        "11": 295,
+        "12": 354,
+        "13": 417,
+        "14": 482,
+        "15": 549,
+        "16": 614,
+        "17": 677,
+        "18": 736
+      },
+      "shoes": {
+        "type": "hp",
+        "special_effects": {
+        "default": [
+          {
+            "name": "mov_speed",
+            "values": [10.0, 7.0],
+            "valueType": "percent"
+          },
+          {
+            "name": "fatal_mov_speed",
+            "values": [13.0],
+            "valueType": "percent"
+
+          }
+        ],
+        "ancient": [
+          {
+            "name": "sp_attack",
+            "values": [800, 400],
+            "valueType": "flat"
+          },
+          {
+            "name": "fatal_super_armor",
+            "values": [20.0, 15.0],
+            "valueType": "percent"
+          }
+        ],
+        "18": [
+          {
+            "name": "crit_damage",
+            "values": [3.0],
+            "valueType": "percent"
+          }
+        ]
+      },
+        "0": 0,
+        "1": 11,
+        "2": 15,
+        "3": 19,
+        "4": 26,
+        "5": 35,
+        "6": 46,
+        "7": 61,
+        "8": 78,
+        "9": 99,
+        "10": 123,
+        "11": 150,
+        "12": 180,
+        "13": 213,
+        "14": 246,
+        "15": 280,
+        "16": 314,
+        "17": 346,
+        "18": 376
+      },
+      "mantle": {
+        "type": "hp",
+        "special_effects": {
+        "default": [
+          {
+            "name": "potion_effect_rec",
+            "values": [20.0, 15.0],
+            "valueType": "percent"
+          },
+          {
+            "name": "fatal_potion_effect_rec",
+            "values": [100.0, 50.0],
+            "valueType": "percent"
+
+          }
+        ],
+        "ancient": [
+          {
+            "name": "attack",
+            "values": [600, 300],
+            "valueType": "flat"
+          },
+          {
+            "name": "crit_resistance",
+            "values": [20.0, 15.0],
+            "valueType": "percent"
+          }
+        ],
+        "18": [
+          {
+            "name": "crit_damage",
+            "values": [3.0],
+            "valueType": "percent"
+          }
+        ]
+      },
+        "0": 0,
+        "1": 11,
+        "2": 15,
+        "3": 19,
+        "4": 26,
+        "5": 35,
+        "6": 46,
+        "7": 61,
+        "8": 78,
+        "9": 99,
+        "10": 123,
+        "11": 150,
+        "12": 180,
+        "13": 213,
+        "14": 246,
+        "15": 280,
+        "16": 314,
+        "17": 346,
+        "18": 376
+      },
+      "weapon": {
+        "type": "attack",
+        "special_effects": {
+        "default": [
+          {
+            "name": "crit_damage",
+            "values": [10.0, 7.0],
+            "valueType": "percent"
+          },
+          {
+            "name": "fatal_crit_damage",
+            "values": [20.0, 15.0],
+            "valueType": "percent"
+
+          }
+        ],
+        "ancient": [
+          {
+            "name": "crit_damage",
+            "values": [10.0, 7.0],
+            "valueType": "percent"
+          },
+          {
+            "name": "fatal_crit_damage",
+            "values": [20.0, 15.0],
+            "valueType": "percent"
+
+          }
+        ],
+        "18": [
+          {
+            "name": "crit_damage",
+            "values": [3.0],
+            "valueType": "percent"
+          }
+        ]
+      },
+      "0": 0,
+      "1": 50,
+      "2": 67,
+      "3": 91,
+      "4": 122,
+      "5": 163,
+      "6": 216,
+      "7": 281,
+      "8": 361,
+      "9": 455,
+      "10": 565,
+      "11": 689,
+      "12": 825,
+      "13": 972,
+      "14": 1125,
+      "15": 1281,
+      "16": 1434,
+      "17": 1580,
+      "18": 1717
+      }           
+    }
+  },
+  {
+    "stone": "normal",
+    "data": {
+      "helmet": {
+        "type": "defense",
+        "special_effects": {},
+        "1": 92,
+        "2": 95, 
+        "3": 99, 
+        "4": 104,
+        "5": 110,
+        "6": 119,
+        "7": 129,
+        "8": 142,
+        "9": 156,
+        "10": 174,
+        "11": 193,
+        "12": 215,
+        "13": 239,
+        "14": 264,
+        "15": 289,
+        "16": 315,
+        "17": 340,
+        "18": 363
+      },
+      "upper-armor": {
+        "type": "defense",
+        "special_effects": {},
+        "0": 0,
+        "1": 107,
+        "2": 110,
+        "3": 115,
+        "4": 121,
+        "5": 129,
+        "6": 139,
+        "7": 151,
+        "8": 165,
+        "9": 183,
+        "10": 203,
+        "11": 226,
+        "12": 251,
+        "13": 279,
+        "14": 308,
+        "15": 338,
+        "16": 367,
+        "17": 396,
+        "18": 424
+      },
+      "lower-armor": {
+        "type": "defense",
+        "special_effects": {},
+        "0": 0,
+        "1": 107,
+        "2": 110,
+        "3": 115,
+        "4": 121,
+        "5": 129,
+        "6": 139,
+        "7": 151,
+        "8": 165,
+        "9": 183,
+        "10": 203,
+        "11": 226,
+        "12": 251,
+        "13": 279,
+        "14": 308,
+        "15": 338,
+        "16": 367,
+        "17": 396,
+        "18": 424
+      },
+      "gloves": {
+        "type": "attack",
+        "special_effects": {},
+        "0": 0,
+        "1": 15,
+        "2": 20,
+        "3": 28,
+        "4": 38,
+        "5": 51,
+        "6": 67,
+        "7": 89,
+        "8": 114,
+        "9": 145,
+        "10": 182,
+        "11": 223,
+        "12": 269,
+        "13": 319,
+        "14": 371,
+        "15": 425,
+        "16": 479,
+        "17": 532,
+        "18": 581
+      },
+      "shoes": {
+        "type": "hp",
+        "special_effects": {},
+        "0": 0,
+        "1": 8,
+        "2": 11,
+        "3": 14,
+        "4": 19,
+        "5": 26,
+        "6": 35,
+        "7": 45,
+        "8": 59,
+        "9": 75,
+        "10": 93,
+        "11": 114,
+        "12": 138,
+        "13": 163,
+        "14": 190,
+        "15": 218,
+        "16": 246,
+        "17": 273,
+        "18": 298
+      },
+      "mantle": {
+        "type": "hp",
+        "special_effects": {},
+        "0": 0,
+        "1": 8,
+        "2": 11,
+        "3": 14,
+        "4": 19,
+        "5": 26,
+        "6": 35,
+        "7": 45,
+        "8": 59,
+        "9": 75,
+        "10": 93,
+        "11": 114,
+        "12": 138,
+        "13": 163,
+        "14": 190,
+        "15": 218,
+        "16": 246,
+        "17": 273,
+        "18": 298
+      },
+      "weapon": {
+        "type": "attack",
+        "special_effects": {},
+        "0": 0,
+        "1": 35,
+        "2": 48,
+        "3": 65,
+        "4": 88,
+        "5": 118,
+        "6": 157,
+        "7": 207,
+        "8": 267,
+        "9": 339,
+        "10": 424,
+        "11": 520,
+        "12": 627,
+        "13": 744,
+        "14": 866,
+        "15": 992,
+        "16": 1118,
+        "17": 1241,
+        "18": 1356
+      }           
+    }
+  }
+]
+

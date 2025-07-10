@@ -17,6 +17,7 @@ export interface Item extends EquippedItem {
 export interface EquipmentModalProps {
   type: string;
   equipmentType: string,
+  slotType: string,
   onSelectItem: (item: Item) => void;
   onClose: () => void;
 }

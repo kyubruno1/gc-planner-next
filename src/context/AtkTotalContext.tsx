@@ -55,6 +55,26 @@ export function AtkTotalProvider({ children }: { children: ReactNode }) {
     }, { ...emptyCharacterStatus });
   }
 
+  // function calculateAtkTotal(character: CharacterStatus): number {
+  //   const {
+  //     attack,
+  //     crit_chance,
+  //     crit_damage,
+  //     sp_attack,
+  //     mp_rec,
+  //     defense: def,
+  //     sp_def,
+  //     hp,
+  //     hp_rec,
+  //   } = character;
+
+  //   return (
+  //     ((1 - crit_chance / 100) + (crit_chance / 100) * (1.2 + crit_damage / 100)) *
+  //     ((attack * 27 + (attack + sp_attack) * 20 * (1 + mp_rec / 100)) / 33.75) +
+  //     0.7 * (def + sp_def / 5 + hp * (1 + hp_rec / 100))
+  //   );
+  // }
+
   function calculateAtkTotal(character: CharacterStatus): number {
     const {
       attack,
@@ -68,11 +88,13 @@ export function AtkTotalProvider({ children }: { children: ReactNode }) {
       hp_rec,
     } = character;
 
-    return (
-      ((1 - crit_chance / 100) + (crit_chance / 100) * (1.2 + crit_damage / 100)) *
-      ((attack * 27 + (attack + sp_attack) * 20 * (1 + mp_rec / 100)) / 33.75) +
-      0.7 * (def + sp_def / 5 + hp * (1 + hp_rec / 100))
-    );
+    const critFactor = (1 - crit_chance / 100) + (crit_chance / 100) * (1.2 + crit_damage / 100);
+    const atkBase = ((attack * 27 + (attack + sp_attack) * 20 * (1 + mp_rec / 100)) / 33.75);
+    const defPart = 0.7 * (def + sp_def / 5 + hp * (1 + hp_rec / 100));
+
+    const total = critFactor * atkBase + defPart;
+
+    return total;
   }
 
   function addSource(id: string, status: Partial<CharacterStatus>) {
@@ -98,32 +120,63 @@ export function AtkTotalProvider({ children }: { children: ReactNode }) {
   function extractStatusFromEquipments(): Record<string, Partial<CharacterStatus>> {
     const extracted: Record<string, Partial<CharacterStatus>> = {};
 
-    function extractCardEffects(card: { effects: { name: string; value: number }[] }) {
+    function extractCardEffects(card: { effects?: { name: string; value: number }[] }) {
       const effectsObj: Partial<CharacterStatus> = {};
+
+      if (!card || !Array.isArray(card.effects)) {
+        console.warn("Card inválido ou efeitos ausentes:", card);
+        return effectsObj;
+      }
+
       for (const effect of card.effects) {
+        if (!effect?.name || typeof effect.value !== "number") {
+          console.warn("Efeito inválido em card:", effect);
+          continue;
+        }
+
         effectsObj[effect.name as keyof CharacterStatus] =
           (effectsObj[effect.name as keyof CharacterStatus] || 0) + effect.value;
       }
+
       return effectsObj;
     }
 
     for (const slot in equipped) {
       const item = equipped[slot];
-      extracted[`equip:${slot}`] = normalizeCharacterStatus(item);
 
+      // ⚠️ Extrair apenas os campos válidos
+      const statusOnly: Partial<CharacterStatus> = {};
+      for (const key in item) {
+        if (key in emptyCharacterStatus && typeof item[key] === "number") {
+          statusOnly[key as keyof CharacterStatus] = item[key];
+        }
+      }
+      extracted[`equip:${slot}`] = normalizeCharacterStatus(statusOnly);
+
+      // Cartas
       if (item.cards) {
         item.cards.forEach((card, index) => {
           extracted[`equip:${slot}:card${index}`] = normalizeCharacterStatus(extractCardEffects(card));
         });
       }
 
+      // Props selecionadas
       if (item.selectedProps) {
-        extracted[`equip:${slot}:props`] = normalizeCharacterStatus(item.selectedProps);
+        const filteredProps: Partial<CharacterStatus> = {};
+        for (const key in item.selectedProps) {
+          if (key in emptyCharacterStatus && typeof item.selectedProps[key] === "number") {
+            filteredProps[key as keyof CharacterStatus] = item.selectedProps[key] as number;
+          }
+        }
+
+        extracted[`equip:${slot}:props`] = normalizeCharacterStatus(filteredProps);
       }
     }
 
     return extracted;
   }
+
+
 
   // Atualiza status dos equips e bônus, preservando pedras
   useEffect(() => {
@@ -148,11 +201,32 @@ export function AtkTotalProvider({ children }: { children: ReactNode }) {
   }, [equipped]);
 
   // Sempre que as fontes mudarem, recalcula tudo
+  // useEffect(() => {
+  //   const summed = sumSources(sources);
+  //   setCharacterStatus(summed);
+  //   setAtkTotal(calculateAtkTotal(summed));
+
+
+  //   // const testCharacter = { ...summed, crit_chance: 100, crit_damage: 100 };
+  //   // const result = calculateAtkTotal(testCharacter);
+
+  // }, [sources]);
   useEffect(() => {
     const summed = sumSources(sources);
-    setCharacterStatus(summed);
-    setAtkTotal(calculateAtkTotal(summed));
+
+    setCharacterStatus((prev) => {
+      if (JSON.stringify(prev) === JSON.stringify(summed)) return prev;
+      return summed;
+    });
+
+    setAtkTotal((prev) => {
+      const newAtk = calculateAtkTotal(summed);
+      if (prev === newAtk) return prev;
+      return newAtk;
+    });
   }, [sources]);
+
+
 
   return (
     <AtkTotalContext.Provider

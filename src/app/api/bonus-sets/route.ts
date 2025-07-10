@@ -5,63 +5,25 @@ const prisma = new PrismaClient();
 
 export async function GET() {
   try {
-    // Buscar todos os equipamentos base que tenham bonusType preenchido
-    const equipmentBases = await prisma.equipmentBase.findMany({
-      where: {
-        bonusType: {
-          not: null,
-        },
-      },
-      select: {
-        bonusType: true,
-        total_attack: true,
-        attack: true,
-        crit_chance: true,
-        crit_damage: true,
-        sp_attack: true,
-        mp_rec: true,
-        hell_spear_chance: true,
-        hell_spear: true,
-        taint_resistance: true,
-        defense: true,
-        hp: true,
-        crit_resistance: true,
-        sp_def: true,
-        hp_rec: true,
-        counter_attack_resistance: true,
-        exp: true,
-        gp: true,
-      },
-    });
+    // Busca todos os conjuntos de bônus já armazenados em JSON
+    const sets = await prisma.bonusSetJson.findMany();
 
-    // Agrupar os bônus por bonusType somando os valores
-    const groupedBonuses: Record<string, Record<string, number>> = {};
+    // Aqui, se quiser, pode formatar ou retornar direto
+    // O campo `bonuses` já é um JSON com a estrutura desejada
+    // Exemplo de estrutura de `bonuses`: { "2": {...}, "3": {...}, ... }
 
-    for (const eq of equipmentBases) {
-      const bt = eq.bonusType!;
-      if (!groupedBonuses[bt]) {
-        groupedBonuses[bt] = {};
-      }
-
-      for (const key in eq) {
-        if (key === "bonusType") continue;
-        const val = eq[key as keyof typeof eq];
-        if (typeof val === "number" && val !== null) {
-          groupedBonuses[bt][key] = (groupedBonuses[bt][key] || 0) + val;
-        }
-      }
-    }
-
-    // Transformar para array, se preferir
-    const result = Object.entries(groupedBonuses).map(([bonusType, stats]) => ({
-      bonusType,
-      ...stats,
+    // Formatar a resposta para remover campos desnecessários, se desejar
+    const formatted = sets.map(set => ({
+      bonusType: set.bonusType,
+      name: set.name,
+      setPieces: set.setPieces,
+      bonuses: set.bonuses,
     }));
 
-    return NextResponse.json(result);
+    return NextResponse.json(formatted);
   } catch (error) {
-    console.error(error);
-    return NextResponse.json({ error: "Erro ao buscar bonus sets" }, { status: 500 });
+    console.error("Erro na API /bonus-sets:", error);
+    return NextResponse.json({ error: "Erro ao buscar bônus" }, { status: 500 });
   } finally {
     await prisma.$disconnect();
   }

@@ -20,3 +20,25 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Erro ao buscar itens" }, { status: 500 });
   }
 }
+
+
+export async function POST(request: Request) {
+  try {
+    const { ids } = await request.json();
+
+    if (!Array.isArray(ids) || ids.length === 0) {
+      return NextResponse.json({ error: "IDs inválidos" }, { status: 400 });
+    }
+
+    const items = await prisma.equipmentBase.findMany({
+      where: {
+        id: { in: ids },
+      },
+    });
+
+    return NextResponse.json(items);
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ error: "Erro ao buscar itens por ID" }, { status: 500 });
+  }
+}

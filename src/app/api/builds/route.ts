@@ -1,32 +1,83 @@
-import { prisma } from '@/lib/prisma';
+import { prisma } from "@/lib/prisma";
+import { NextRequest, NextResponse } from "next/server";
 
-import { NextResponse } from 'next/server';
+export async function GET() {
+  try {
+    const builds = await prisma.build.findMany({
+      include: {
+        character: true,
+        status: true,
+        equipments: {
+          include: {
+            cards: true,
+            stones: true,
+          },
+        },
+      },
+      orderBy: { savedAt: "desc" },
+    });
 
-export async function POST(req: Request) {
-  const body = await req.json();
+    return NextResponse.json(builds);
+  } catch (error) {
+    console.error("Erro ao buscar builds:", error);
+    return NextResponse.json(
+      { error: "Erro ao buscar builds" },
+      { status: 500 }
+    );
+  }
+}
 
-  const {
-    characterId,
-    jobKey,
-    sheetName,
-    equipped,
-    totalAttack,
-    status,
-    combinedSetsEffect,
-  } = body;
+export async function POST(req: NextRequest) {
+  try {
+    const body = await req.json();
 
-  const newBuild = await prisma.build.create({
-    data: {
+    const {
       characterId,
       jobKey,
       sheetName,
       totalAttack,
-      status: {
-        create: status,
-      },
-      // Isso exige que você crie também os Equipamentos, Cartas, etc.
-    },
-  });
+      status,
+      equipped,
+    } = body;
 
-  return NextResponse.json(newBuild);
+    const build = await prisma.build.create({
+      data: {
+        characterId,
+        jobKey,
+        sheetName,
+        totalAttack,
+        status: {
+          create: status,
+        },
+        equipments: {
+          create: equipped.map((eq: any) => ({
+            baseId: eq.baseId,
+            propsOverride: eq.propsOverride,
+            cards: {
+              create: (eq.cards || []).map((card: any) => ({
+                baseId: card.baseId,
+                effectsOverride: card.effectsOverride,
+              })),
+            },
+            stones: {
+              create: (eq.stones || []).map((stone: any) => ({
+                baseId: stone.baseId,
+                dataOverride: stone.dataOverride,
+              })),
+            },
+          })),
+        },
+      },
+    });
+
+
+    console.log('ok?')
+    return NextResponse.json({ success: true, buildId: build.id });
+  } catch (error) {
+    console.error("Erro ao salvar build:", error);
+    return NextResponse.json(
+      { error: "Erro ao salvar build" },
+      { status: 500 }
+    );
+  }
 }

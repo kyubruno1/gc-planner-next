@@ -7,7 +7,7 @@ export function BaseModal({ onClose, children, maxWidth = "750px", maxHeight = "
 
   return (
     <div
-      className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-[9999]"
+      className="fixed inset-0 bg-black/70 flex justify-center items-center z-[9999]"
       onClick={onClose}
     >
       <div

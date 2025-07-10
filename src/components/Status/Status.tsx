@@ -30,7 +30,7 @@ export function Status() {
   if (!characterStatus) return null;
 
   return (
-    <div className="col-span-3 grid grid-cols-2 gap-2.5 bg-bgdarkblue rounded-lg border-3 border-primary shadow-darkblue mt-5">
+    <div className="col-span-3 grid grid-cols-2 gap-2.5 bg-bgdarkblue rounded-lg border-3 border-primary shadow-dark-blue mt-5">
       <p className="bg-bgtextdark text-gold font-bold text-2xl text-shadow-title rounded-lg col-span-2 flex justify-center items-center gap-4 px-5 py-2.5">
         <span>Ataque Total</span>
         <span>{atkTotal.toFixed(0)}</span>
