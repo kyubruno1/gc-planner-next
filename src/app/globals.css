@@ -26,6 +26,10 @@
   text-shadow: 2px 2px 3px rgba(0, 0, 0, 1);
 }
 
+.text-shadow-login {
+  text-shadow: 2px 2px 3px rgba(111, 112, 89, 0.1);
+}
+
 .text-outline-xs {
   text-shadow: 0 0 0.5px #000;
 }
