@@ -29,7 +29,7 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="relative w-screen h-screen overflow-hidden">
+    <div className="relative max-w-screen max-h-screen overflow-hidden h-[calc(100vh-5.4rem)]">
       {/* Imagem de fundo com opacidade */}
       <div className="absolute inset-0 bg-[url('/assets/images/login.png')] bg-cover bg-center opacity-20 z-0" />
 
@@ -94,7 +94,7 @@ export default function LoginPage() {
           />
         </div>
       </div>
-    </main>
+    </div>
   );
 
 }

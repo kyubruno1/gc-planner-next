@@ -85,11 +85,13 @@ export function EquipmentModal({ type, equipmentType, slotType, onSelectItem, on
                     selectedItem.selectedProps = {};
 
                     Object.entries(itemWithLevel.props).forEach(([key, value]) => {
+                      const typedKey = key as keyof typeof itemWithLevel.props;
+
                       const min = value.min ?? 0;
                       const max = value.max ?? 0;
 
                       if (min > 0 && min === max) {
-                        selectedItem.selectedProps![key] = min; // valor único
+                        selectedItem.selectedProps![typedKey] = min; // valor único
                       }
                     });
                   }
@@ -173,6 +175,7 @@ export function EquipmentModal({ type, equipmentType, slotType, onSelectItem, on
                     <div className="text-sm text-white mt-2 space-y-1">
                       {item.props &&
                         Object.entries(item.props)
+                          // eslint-disable-next-line @typescript-eslint/no-unused-vars
                           .filter(([_, val]) => val.min > 0 || val.max > 0)
                           .map(([key, val]) => (
                             <p key={key}>

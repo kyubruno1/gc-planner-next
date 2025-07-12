@@ -26,8 +26,12 @@ export function CharacterSelectModal({ onClose }: CharacterSelectModalProps) {
         if (!res.ok) throw new Error(`Erro ${res.status}`);
         const data: Character[] = await res.json();
         setCharacters(data);
-      } catch (err: any) {
-        setError(err.message || "Erro ao carregar personagens");
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("Erro desconhecido ao carregar personagens");
+        }
       } finally {
         setLoading(false);
       }
@@ -35,6 +39,7 @@ export function CharacterSelectModal({ onClose }: CharacterSelectModalProps) {
 
     fetchCharacters();
   }, []);
+
 
   return (
     <BaseModal onClose={onClose} maxWidth="90rem" title="Selecione seu Personagem" titleColor="text-gold">

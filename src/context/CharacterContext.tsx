@@ -76,61 +76,6 @@ export function CharacterProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  // function reloadCharacter() {
-  //   if (!characterStatus) {
-  //     setCharacter(null);
-  //     return;
-  //   }
-  // }
-
-  //   const bonusExtras = calculateBonusExtras();
-
-  //   setCharacter({
-  //     status: characterStatus,
-  //     totalAttack: atkTotal,
-  //     equipped,
-  //     combinedSetsEffect: bonusExtras,
-  //   });
-  // }
-
-  // async function reloadCharacter() {
-  //   if (activeBuildId) {
-  //     try {
-  //       const res = await fetch(`/api/builds/${activeBuildId}`);
-  //       if (!res.ok) throw new Error("Falha ao carregar build do banco");
-
-  //       const data = await res.json();
-
-  //       // Atualiza o estado da build com os dados vindos do banco
-  //       const bonusExtras = calculateBonusExtras(); // Se você quiser manter
-  //       console.log('bonusExtras', bonusExtras)
-  //       setCharacter({
-  //         status: data.status,
-  //         totalAttack: data.totalAttack,
-  //         equipped: data.equipped, // <- pode já vir pronto, ou você pode ajustar via setFullEquip
-  //         combinedSetsEffect: data.combinedSetsEffect || bonusExtras,
-  //       });
-
-  //     } catch (err) {
-  //       console.error("Erro ao recarregar build do banco:", err);
-  //     }
-  //   } else {
-  //     // fallback atual
-  //     if (!characterStatus) {
-  //       setCharacter(null);
-  //       return;
-  //     }
-
-  //     const bonusExtras = calculateBonusExtras();
-  //     setCharacter({
-  //       status: characterStatus,
-  //       totalAttack: atkTotal,
-  //       equipped,
-  //       combinedSetsEffect: bonusExtras,
-  //     });
-  //   }
-  // }
-
   async function reloadCharacter() {
     if (activeBuildId) {
       try {

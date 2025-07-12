@@ -19,6 +19,7 @@ interface JobCollectionBonus {
 }
 
 export interface Character {
+  id?: string;
   name: string;
   img: string;
   qtJobs: number;

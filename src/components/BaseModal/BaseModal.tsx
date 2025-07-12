@@ -11,7 +11,7 @@ export function BaseModal({ onClose, children, maxWidth = "750px", maxHeight = "
       onClick={onClose}
     >
       <div
-        className="relative overflow-y-auto p-5 rounded-md shadow-lg bg-bgtextdark border-[7px] border-primary outline-[3px] outline outline-bgdarkblue "
+        className="relative overflow-y-auto p-5 rounded-md shadow-lg bg-bgtextdark border-[7px] border-primary outline-[3px]  outline-bgdarkblue "
         style={{ maxWidth, maxHeight, width: "100%" }}
         onClick={(e) => e.stopPropagation()}
       >

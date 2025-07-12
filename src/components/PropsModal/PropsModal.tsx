@@ -101,6 +101,7 @@ export function PropsModal({
       >
         <ul className="text-white text-sm space-y-2 max-h-auto overflow-y-auto px-2">
           {Object.entries(propsData)
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             .filter(([_, value]) => value !== undefined)
             .sort(([keyA], [keyB]) => {
               const indexA = orderedKeys.indexOf(keyA);

@@ -49,7 +49,7 @@ export function SetEffectModal() {
               equippedPieces,
               totalPieces: set.setPieces,
               pieceCount,
-              bonuses: set.bonuses,  // Aqui está agrupado como deseja
+              bonuses: set.bonuses,
             });
           }
         }

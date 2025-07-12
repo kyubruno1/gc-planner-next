@@ -1,6 +1,6 @@
 'use client';
 
-import { useCharacter } from "@/context/CharacterContext";
+import { SavedCharacter, useCharacter } from "@/context/CharacterContext";
 import { useEquip } from "@/context/EquipContext"; // Import necessário
 import { characterLabel } from "@/utils/characterLabel";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -13,24 +13,22 @@ interface SavedCharactersModalProps {
 export function SavedCharactersModal({ onClose }: SavedCharactersModalProps) {
   const {
     savedCharacters,
-    fetchSavedCharacters,
     removeCharacterFromSaved,
     setSelectedCharacter,
     setSelectedJobKey,
-    setSheetName,
     reloadCharacter,
   } = useCharacter();
 
 
-  const { setFullEquip } = useEquip();  // UseEquip para atualizar equipamentos
+  const { setFullEquip } = useEquip();
 
   const [loadingId, setLoadingId] = useState<string | null>(null);
 
-  function handleLoadCharacter(sc: any) {
-    console.log(sc)
-    setFullEquip(sc)
-    setSelectedCharacter(sc.character);
-    setSelectedJobKey(sc.jobKey);
+  function handleLoadCharacter(savedCharacter: SavedCharacter) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    setFullEquip(savedCharacter as any)
+    setSelectedCharacter(savedCharacter.character);
+    setSelectedJobKey(savedCharacter.jobKey);
 
     reloadCharacter();
 
@@ -39,23 +37,6 @@ export function SavedCharactersModal({ onClose }: SavedCharactersModalProps) {
       onClose();
     }, 500);
   }
-
-  // setLoadingId(sc.id);
-  // setSelectedCharacter(sc.character);
-  // setSelectedJobKey(sc.jobKey);
-  // setSheetName(sc.sheetName || "Minha Build");
-
-  // if (sc.equipped) {
-  //   setFullEquip(sc.equipped);
-  // }
-
-  // reloadCharacter();
-
-  // setTimeout(() => {
-  //   setLoadingId(null);
-  //   onClose();
-  // }, 500);
-  // }
 
   async function handleDeleteCharacter(id: string) {
     setLoadingId(id);

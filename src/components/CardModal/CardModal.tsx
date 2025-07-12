@@ -74,7 +74,7 @@ export function CardModal({ onClose, rarity, slotName }: CardModalProps) {
             </span>
           </div>
           <div className="flex flex-col justify-center items-center gap-4 p-4">
-            <div className="w-[14rem] h-[14rem] p-1 bg-yellow-300 rounded-lg outline outline-[3px] outline-gold">
+            <div className="w-[14rem] h-[14rem] p-1 bg-yellow-300 rounded-lg  outline-[3px] outline-gold">
               <Image
                 width={216}
                 height={216}

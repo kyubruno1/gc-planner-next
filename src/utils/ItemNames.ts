@@ -19,6 +19,8 @@ export const slotNames: Record<string, string> = {
 } 
 
 export const itemGrades: Record<string, string> = {
+  normal: "normal",
+  common: "normal",
   rare: "raro",
   epic: "épico",
   legendary: "lendário",
@@ -26,6 +28,7 @@ export const itemGrades: Record<string, string> = {
 }
 
 export const gradeColors: Record<string, string> = {
+  normal: "text-white",
   common: 'text-white',
   rare: 'text-equipRare',
   epic: 'text-equipEpic',
@@ -85,3 +88,11 @@ export const itemNames: Record<string, string> = {
   gp_necklace: "Colar do Vento",
   gp_bracelet: "Tornozeleira Mágica"
 };
+
+export const setEffectNames: Record<string, string> = {
+  berkas_epic: "Conjunto do Dragão de Ferro",
+  berkas_legendary: "Conjunto do Verdadeiro Dragão de Ferro",
+  void_ancient: "Desafiante do Vazio",
+  dimensional_guardian_epic: "Conjunto dos Guardiões Dimensionais"
+}
+

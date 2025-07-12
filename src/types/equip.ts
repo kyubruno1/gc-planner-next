@@ -15,6 +15,7 @@ export interface EquippedItem extends CharacterStatus {
   props: ItemProps;
   selectedProps?: Partial<ItemProps>;
   cards?: Card[];
+  selectedLevel?: number;
 }
 
 export interface EquippedItems {

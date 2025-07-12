@@ -49,10 +49,10 @@ export function CardSelectModal({ slot, onSelectCard, onClose }: CardSelectModal
 
   return (
     <BaseModal onClose={onClose} maxWidth="90rem" title="Selecione uma Carta" titleColor="text-purple-500">
-      <div className="bg-bgdarkblue max-h-[750px] overflow-y-auto hide-scrollbar p-4 border-[7px] border-primary outline-[3px] outline outline-bgdarkblue rounded-md">
+      <div className="bg-bgdarkblue max-h-[750px] overflow-y-auto hide-scrollbar p-4 border-[7px] border-primary outline-[3px]  outline-bgdarkblue rounded-md">
 
         {/* Filtros de efeitos */}
-        <div className="mb-4 bg-bgtextdark border-b-[7px] border-primary outline-[3px] outline outline-bgdarkblue rounded-md p-4">
+        <div className="mb-4 bg-bgtextdark border-b-[7px] border-primary outline-[3px]  outline-bgdarkblue rounded-md p-4">
           <p className="mb-2 text-white font-semibold">Filtre por efeito de carta:</p>
           <div className="flex flex-wrap gap-2">
             {allEffects.map((effect) => (

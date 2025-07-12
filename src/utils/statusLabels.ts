@@ -36,6 +36,20 @@ export const statusLabels: Record<string, string> = {
   fatal_attack_up: "Aumento de Ataque no Fatal"
 };
 
+export const orderedStatusKeys: (keyof typeof statusLabels)[] = [
+  "attack",
+  "defense",
+  "hp",
+  "crit_chance",
+  "crit_damage",
+  "hp_rec",
+  "mp_rec",
+  "gp",
+  "sp_attack",
+  "sp_def",
+  "taint_resistance",
+];
+
 // Inverte o objeto: valores viram chaves e chaves viram valores
 function invertLabels(labels: Record<string, string>): Record<string, string> {
   const inverted: Record<string, string> = {};

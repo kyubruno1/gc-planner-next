@@ -1,8 +1,7 @@
 import { Button } from "../Button/Button";
 
-interface PresetButtonsEquipProps { }
 
-export function PresetButtonsEquip(props: PresetButtonsEquipProps) {
+export function PresetButtonsEquip() {
   return (
     <div className="border-t pt-4 flex flex-col gap-2.5">
       <Button>Texto</Button>

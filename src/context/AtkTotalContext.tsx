@@ -42,18 +42,34 @@ export function AtkTotalProvider({ children }: { children: ReactNode }) {
   const [atkTotal, setAtkTotal] = useState<number>(calculateAtkTotal(statusBase));
 
   function normalizeCharacterStatus(partial: Partial<CharacterStatus>): CharacterStatus {
-    return { ...emptyCharacterStatus, ...partial };
+    return { ...emptyCharacterStatus, ...partial } as CharacterStatus;
   }
+
+  // function sumSources(sources: Record<string, Partial<CharacterStatus>>): CharacterStatus {
+  //   return Object.values(sources).reduce((acc, cur) => {
+  //     const norm = normalizeCharacterStatus(cur);
+  //     for (const key in acc) {
+  //       acc[key as keyof CharacterStatus] ?? 0 += norm[key as keyof CharacterStatus] ?? 0;
+  //     }
+  //     return acc;
+  //   }, { ...emptyCharacterStatus });
+  // }
 
   function sumSources(sources: Record<string, Partial<CharacterStatus>>): CharacterStatus {
     return Object.values(sources).reduce((acc, cur) => {
       const norm = normalizeCharacterStatus(cur);
+
       for (const key in acc) {
-        acc[key as keyof CharacterStatus] += norm[key as keyof CharacterStatus];
+        // Garante que ambos sejam números
+        const accValue = acc[key as keyof CharacterStatus] ?? 0;
+        const normValue = norm[key as keyof CharacterStatus] ?? 0;
+
+        acc[key as keyof CharacterStatus] = accValue + normValue;
       }
       return acc;
     }, { ...emptyCharacterStatus });
   }
+
 
   // function calculateAtkTotal(character: CharacterStatus): number {
   //   const {
@@ -175,8 +191,6 @@ export function AtkTotalProvider({ children }: { children: ReactNode }) {
 
     return extracted;
   }
-
-
 
   // Atualiza status dos equips e bônus, preservando pedras
   useEffect(() => {

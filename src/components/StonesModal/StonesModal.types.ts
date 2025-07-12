@@ -10,6 +10,7 @@ export interface StonesModalProps {
     effect?: string;
     effectValueIndex?: number;
   };
+  rarity: "normal" | "epic";
   onApply: (
     slotName: string,
     data: {

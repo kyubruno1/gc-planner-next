@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import changeCharacter from "@/../public/assets/images/system/change_character.png";
 import { CharacterSelectModal } from "@/components/CharacterSelectModal/CharacterSelectModal";
 import { EquipOverview } from "@/components/EquipOverview/EquipOverview";
-import { Header } from "@/components/Header/Header";
 import { Items } from "@/components/Items/Items";
 import { PageContainer } from "@/components/Page-container/Page-container";
 import { SavedCharactersModal } from "@/components/SavedCharactersModal/SavedCharactersModal";
@@ -85,134 +84,113 @@ export function EquipClient() {
   const classes = `${baseClasses} ${lightClasses}`;
 
   return (
-
     <>
-      <div className="absolute inset-0 bg-[url('/assets/images/login.png')] bg-cover bg-center opacity-20 z-0" />
-      <div className="relative z-10 w-full h-full p-6 bg-gradient-to-b from-bgdarkblue/70 to-bgtextdark/70">
-        <Header />
-        <PageContainer>
-          <div className={`${classes} flex gap-2 w-full flex-col`}>
-            <label htmlFor="sheetNameInput" className="text-sm text-gray-600">
-              Dê um título para a build:
-            </label>
-            {isEditingName ? (
-              <input
-                type="text"
-                value={tempName}
-                onChange={(e) => setTempName(e.target.value)}
-                onBlur={() => {
+      {/* <div className="absolute inset-0 bg-[url('/assets/images/login.png')] bg-cover bg-center opacity-20 z-0" /> */}
+      <PageContainer>
+        <div className={`${classes} flex gap-2 w-full flex-col `}>
+          <label htmlFor="sheetNameInput" className="text-sm text-gray-600">
+            Dê um título para a build:
+          </label>
+          {isEditingName ? (
+            <input
+              type="text"
+              value={tempName}
+              onChange={(e) => setTempName(e.target.value)}
+              onBlur={() => {
+                setSheetName(tempName.trim() || "Minha Build");
+                setIsEditingName(false);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
                   setSheetName(tempName.trim() || "Minha Build");
                   setIsEditingName(false);
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    setSheetName(tempName.trim() || "Minha Build");
-                    setIsEditingName(false);
-                  }
-                }}
-                autoFocus
-                className="text-lg font-semibold text-black border border-gray-400 rounded px-2 py-1 bg-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary"
-                placeholder="Digite o nome da build"
-              />
-            ) : (
-              <span
-                className="group inline-flex items-center gap-2 text-lg font-semibold text-black cursor-text px-2 py-1 border border-gray-300 rounded bg-gray-300 shadow-sm"
-                title="Clique para editar o nome da build"
-                onClick={() => setIsEditingName(true)}
+                }
+              }}
+              autoFocus
+              className="text-lg font-semibold text-black border border-gray-400 rounded px-2 py-1 bg-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary"
+              placeholder="Digite o nome da build"
+            />
+          ) : (
+            <span
+              className="group inline-flex items-center gap-2 text-lg font-semibold text-black cursor-text px-2 py-1 border border-gray-300 rounded bg-gray-300 shadow-sm"
+              title="Clique para editar o nome da build"
+              onClick={() => setIsEditingName(true)}
+            >
+              {sheetName}
+              <span className="text-gray-500 group-hover:text-yellow-600">🖉</span>
+            </span>
+          )}
+
+          <button
+            onClick={handleSaveCharacter}
+            className=" bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded z-50"
+          >
+            Salvar Build
+          </button>
+          <button
+            onClick={() => setIsSavedModalOpen(true)}
+            className=" bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded z-50"
+          >
+            Abrir Builds Salvas
+          </button>
+
+          <PresetButtonsEquip />
+        </div>
+
+
+        <div className={classes}>
+          <div className='grid grid-cols-[8.125rem_2fr_16.25rem] grid-rows-[auto_1fr_auto] gap-4 '>
+            <div className="grid grid-flow-col grid-rows-6 gap-2.5 justify-start">
+              {equipmentLeft.map((slot) => (
+                <Items name={slot} key={slot} equipmentType="equip" />
+              ))}
+            </div>
+
+            <div className="relative flex justify-center items-center">
+              <button
+                className="absolute top-2 right-2 z-2 cursor-pointer"
+                onClick={() => setIsModalOpen(true)}
+                aria-label="Change Character"
               >
-                {sheetName}
-                <span className="text-gray-500 group-hover:text-yellow-600">🖉</span>
-              </span>
-            )}
-
-            <button
-              onClick={handleSaveCharacter}
-              className=" bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded z-50"
-            >
-              Salvar Build
-            </button>
-            <button
-              onClick={() => setIsSavedModalOpen(true)}
-              className=" bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded z-50"
-            >
-              Abrir Builds Salvas
-            </button>
-
-            <PresetButtonsEquip />
-          </div>
-
-
-          <div className={classes} >
-            <div className='grid grid-cols-[8.125rem_2fr_16.25rem] grid-rows-[auto_1fr_auto] gap-4 '>
-              <div className="grid grid-flow-col grid-rows-6 gap-2.5 justify-start">
-                {equipmentLeft.map((slot) => (
-                  <Items name={slot} key={slot} equipmentType="equip" />
-                ))}
-              </div>
-
-              <div className="relative flex justify-center items-center">
-                <button
-                  className="absolute top-2 right-2 z-10"
-                  onClick={() => setIsModalOpen(true)}
-                  aria-label="Change Character"
-                >
-                  <Image src={changeCharacter} className='w-20 h-20 rounded-md' alt="Change Character" width={320} height={320} />
-                </button>
-                <Image
-                  width={960}
-                  height={800}
-                  priority
-                  src={characterImagePath}
-                  alt={`${characterName} - ${jobKey}`}
-                  className="object-contain"
-                  onError={(e) => {
-                    (e.currentTarget as HTMLImageElement).src = "/assets/images/characters/arts/elesis_first_job.png";
-                  }}
-                />
-              </div>
-
-              <div className="grid grid-flow-col grid-rows-6 gap-2.5 justify-end">
-                {equipmentRight.map((slot) => (
-                  <Items name={slot} key={slot} equipmentType="equip" />
-                ))}
-              </div>
-
-              <Status />
-
-
+                <Image src={changeCharacter} className='w-20 h-20 rounded-md' alt="Change Character" width={320} height={320} />
+              </button>
+              <Image
+                width={960}
+                height={800}
+                priority
+                src={characterImagePath}
+                alt={`${characterName} - ${jobKey}`}
+                className="object-contain"
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).src = "/assets/images/characters/arts/elesis_first_job.png";
+                }}
+              />
             </div>
-          </div>
-          <div className={`${classes} gap-2 w-full`}>
-            <div className='text-white rounded-xl'>
-              <h2 className="text-xl font-semibold">Bônus de Set Ativos:</h2>
-              <ul className="list-disc pl-6 space-y-1">
-                {Object.entries(bonusExtras).map(([key, stats]) => (
-                  <li key={key}>
-                    <strong>{key}:</strong>
-                    <ul className="list-circle pl-4">
-                      {Object.entries(stats).map(([statKey, statValue]) => (
-                        <li key={statKey}>
-                          {statKey}: {statValue}
-                        </li>
-                      ))}
-                    </ul>
-                  </li>
-                ))}
-              </ul>
-              <EquipOverview />
+
+            <div className="grid grid-flow-col grid-rows-6 gap-2.5 justify-end">
+              {equipmentRight.map((slot) => (
+                <Items name={slot} key={slot} equipmentType="equip" />
+              ))}
             </div>
+
+            <Status />
+
+
           </div>
-        </PageContainer>
+        </div>
+        <div className={`${classes} gap-2 w-full`}>
+          <EquipOverview />
+        </div>
+      </PageContainer>
 
-        {isModalOpen && <CharacterSelectModal onClose={() => setIsModalOpen(false)} />}
+      {isModalOpen && <CharacterSelectModal onClose={() => setIsModalOpen(false)} />}
 
-        {isSavedModalOpen && (
-          <SavedCharactersModal
-            onClose={() => setIsSavedModalOpen(false)}
-            onLoadCharacter={handleLoadCharacter}
-          />
-        )}
-      </div>
+      {isSavedModalOpen && (
+        <SavedCharactersModal
+          onClose={() => setIsSavedModalOpen(false)}
+          onLoadCharacter={handleLoadCharacter}
+        />
+      )}
     </>
   );
 }
