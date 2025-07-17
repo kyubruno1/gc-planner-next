@@ -1,72 +1,73 @@
+// /app/api/auth/[...nextauth]/route.ts
+
 import { prisma } from "@/lib/prisma";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { compare } from "bcrypt";
-import NextAuth, { AuthOptions } from "next-auth";
+import bcrypt from "bcrypt";
+import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-// 🔐 Configurações principais do NextAuth
-export const authOptions: AuthOptions  = {
-  // Prisma + NextAuth integrados
-  adapter: PrismaAdapter(prisma),
-
-  // 🧾 Usa JWT para armazenar sessão
-  session: {
-    strategy: "jwt",
-  },
-
-  // 🧍 Provedores de login (nesse caso, email/senha)
+const handler = NextAuth({
   providers: [
     CredentialsProvider({
       name: "credentials",
       credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
+        login: { label: "Email ou Username", type: "text", placeholder: "Email ou username" },
+        password: { label: "Senha", type: "password" },
       },
-
-      // 🧠 Função que valida o login
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) return null;
+        if (!credentials?.login || !credentials.password) return null;
 
-        // Busca o usuário no banco
-        const user = await prisma.user.findUnique({
-          where: { email: credentials.email },
+        const user = await prisma.user.findFirst({
+          where: {
+            OR: [
+              { email: credentials.login },
+              { name: credentials.login }, // username no campo name
+            ],
+          },
         });
 
-        // Se não achou, ou não tem senha salva, falha
-        if (!user || !user.password) return null;
+        if (!user) return null;
 
-        // Compara senha digitada com a hash do banco
-        const isValid = await compare(credentials.password, user.password);
+        const isValid = await bcrypt.compare(credentials.password, user.password);
         if (!isValid) return null;
 
-        return user;
+        return {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          image: user.image,
+        };
       },
     }),
   ],
-  //  Redirecionamento customizado
-  pages: {
-    signIn: "/login", // página de login customizada
-  },
-  //  Callbacks: manipular dados de sessão e token JWT
-  callbacks: {
-    // Manipula o que é salvo na sessão
-    async session({ session, token }) {
-      if (session.user) {
-        session.user.id = token.sub!; // injeta o id do usuário na session
-      }
-      return session;
-    },
 
-    // Manipula o token JWT antes de salvar
+  session: {
+    strategy: "jwt",
+  },
+
+  callbacks: {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
+        token.username = user.name;
       }
-      return token; // adiciona id do usuário ao token
+      return token;
+    },
+    async session({ session, token }) {
+      if (token) {
+        session.user.id = token.id as string;
+        session.user.username = token.username as string;
+      }
+      return session;
     },
   },
-};
 
-// Exporta o handler como GET e POST
-const handler = NextAuth(authOptions);
+  pages: {
+    signIn: "/login",
+    error: "/login",
+  },
+
+  secret: process.env.NEXTAUTH_SECRET,
+});
+
+// Como o App Router usa handlers específicos, exportamos o handler para GET e POST
 export { handler as GET, handler as POST };

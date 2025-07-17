@@ -232,7 +232,6 @@ export function EquipProvider({ children }: { children: ReactNode }) {
     return bonusesByType;
   }
 
-
   function flattenBonusExtras(bonusesByType: Record<string, Partial<CharacterStatus>>): Partial<CharacterStatus> {
     const flatBonus: Partial<CharacterStatus> = {};
     for (const bonusType in bonusesByType) {

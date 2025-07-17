@@ -1,53 +1,39 @@
 import { prisma } from "@/lib/prisma";
-import { hash } from "bcrypt";
+import bcrypt from "bcrypt";
 import { NextResponse } from "next/server";
 
-export async function POST(req: Request) {
+export async function POST(request: Request) {
   try {
-    // 1. Lê o corpo da requisição (esperamos JSON com email e senha)
-    const { email, password } = await req.json();
+    const body = await request.json();
+    const { username, email, password } = body;
 
-    // 2. Validação simples: verifica se os dados foram enviados
-    if (!email || !password) {
-      return NextResponse.json(
-        { error: "Email e senha obrigatórios" },
-        { status: 400 }
-      );
+    if (!username || !email || !password) {
+      return NextResponse.json({ error: "Username, email e senha são obrigatórios" }, { status: 400 });
     }
 
-    // 3. Verifica se já existe usuário com esse email
-    const existingUser = await prisma.user.findUnique({
-      where: { email },
+    const existingUser = await prisma.user.findFirst({
+      where: {
+        OR: [{ email }, { name: username }],
+      },
     });
 
     if (existingUser) {
-      return NextResponse.json(
-        { error: "Usuário já existe" },
-        { status: 409 }
-      );
+      return NextResponse.json({ error: "Usuário ou email já cadastrado" }, { status: 409 });
     }
 
-    // 4. Cria o hash da senha (nunca salva senha em texto puro!)
-    const hashedPassword = await hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-    // 5. Cria o usuário no banco
-    const user = await prisma.user.create({
+    await prisma.user.create({
       data: {
+        name: username,
         email,
         password: hashedPassword,
       },
     });
 
-    // 6. Retorna sucesso
-    return NextResponse.json({
-      message: "Usuário criado com sucesso",
-      user: { id: user.id, email: user.email },
-    });
+    return NextResponse.json({ message: "Usuário criado com sucesso" }, { status: 201 });
   } catch (error) {
-    // 7. Em caso de erro, retorna erro genérico
-    return NextResponse.json(
-      { error: "Erro interno ao registrar usuário" },
-      { status: 500 }
-    );
+    console.error(error);
+    return NextResponse.json({ error: "Erro interno do servidor" }, { status: 500 });
   }
 }

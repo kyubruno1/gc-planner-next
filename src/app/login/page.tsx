@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
+  const [login, setLogin] = useState(""); // pode ser email ou username (name)
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
@@ -17,12 +17,12 @@ export default function LoginPage() {
 
     const res = await signIn("credentials", {
       redirect: false,
-      email,
+      login, // aqui enviamos login em vez de email
       password,
     });
 
     if (res?.error) {
-      setError("Email ou senha inválidos");
+      setError("Usuário ou senha inválidos");
     } else if (res?.ok) {
       router.push("/equip");
     }
@@ -44,16 +44,20 @@ export default function LoginPage() {
             onSubmit={handleSubmit}
             className="grid grid-cols-[120px_1fr_auto] gap-4 p-6 w-[700px] bg-[linear-gradient(to_right,_transparent_0%,_rgba(0,0,0,0.6)_20%,_rgba(0,0,0,0.6)_80%,_transparent_100%)]"
           >
-            <label htmlFor="email" className="text-right text-3xl font-bold bg-gradient-to-b from-amber-900 via-amber-600 to-amber-900 bg-clip-text text-transparent text-shadow-login">
-              E-mail
+            {/* Login (email ou username) */}
+            <label
+              htmlFor="login"
+              className="text-right text-lg font-bold bg-gradient-to-b from-amber-900 via-amber-600 to-amber-600 bg-clip-text text-transparent text-shadow-login"
+            >
+              E-mail / Username
             </label>
             <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
+              type="text"
+              id="login"
+              value={login}
+              onChange={e => setLogin(e.target.value)}
               required
-              placeholder="Email"
+              placeholder="Email ou Username"
               className="bg-black/20 border-2 border-amber-400 p-2 rounded w-full text-white focus:outline-none text-lg"
             />
             <button
@@ -63,7 +67,11 @@ export default function LoginPage() {
               Entrar
             </button>
 
-            <label htmlFor="password" className="text-right text-3xl font-bold bg-gradient-to-b from-amber-900 via-amber-500 to-amber-900 bg-clip-text text-transparent text-shadow-login">
+            {/* Senha */}
+            <label
+              htmlFor="password"
+              className="text-right text-3xl font-bold bg-gradient-to-b from-amber-900 via-amber-500 to-amber-900 bg-clip-text text-transparent text-shadow-login"
+            >
               Senha
             </label>
             <input
@@ -75,8 +83,9 @@ export default function LoginPage() {
               placeholder="Senha"
               className="focus:outline-none text-lg bg-black/20 border-2 border-amber-400 font-bold p-2 rounded w-full text-white"
             />
-            <div />
+            <div /> {/* Espaço vazio pra manter o grid */}
 
+            {/* Erro */}
             {error && (
               <div className="col-span-3 text-red-600 text-sm text-center">
                 {error}
@@ -96,5 +105,4 @@ export default function LoginPage() {
       </div>
     </div>
   );
-
 }

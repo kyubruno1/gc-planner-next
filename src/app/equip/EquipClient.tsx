@@ -18,6 +18,9 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 
 export function EquipClient() {
+
+
+
   const equipmentLeft = ['helmet', 'upper-armor', 'lower-armor', 'gloves', 'shoes', 'mantle'];
   const equipmentRight = ['weapon', 'upper-head', 'lower-head', 'upper-back', 'lower-back', 'arms', 'weapon-change', 'ring', 'necklace', 'bracelet', 'earring1', 'earring2'];
 
