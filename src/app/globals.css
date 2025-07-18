@@ -22,6 +22,35 @@
   --border-width-3: 3px;
 }
 
+
+/* Se você usa variáveis CSS em estilos inline, sobrescreve aqui */
+/* .safe-colors {
+  --color-primary: #a1b8ce !important;
+  --color-textLightBlue: #AAE1FF !important;
+  --color-bghovermodal: #2D3649 !important;
+  --color-lightgray: #f0f0f0 !important;
+  --color-bgdarkblue: #566a8f !important;
+  --color-bgtextdark: #4d5d81 !important;
+  --color-textlight: #f4fdff !important;
+  --color-gold: #eeba49 !important;
+  --color-bgpagelight: #b4c3d6 !important;
+  --color-bluecustom: #91a5c2 !important;
+  --color-equipEpic: #eeba49 !important;
+  --color-equipAncient: #D4646F !important;
+  --shadow-dark-blue: 0 0 1px 3px #415870 !important;
+  --border-width-3: 3px !important;
+}
+
+.safe-colors,
+.safe-colors * {
+  background-color: #a1b8ce !important;
+  color: black !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+} */
+
+
 .text-shadow-title {
   text-shadow: 2px 2px 3px rgba(0, 0, 0, 1);
 }

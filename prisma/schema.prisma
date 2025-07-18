@@ -18,6 +18,8 @@ model User {
   builds         Build[]
   accounts       Account[]
   sessions       Session[]
+  likes          Like[]
+  comments       Comment[]
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
 }
@@ -72,6 +74,9 @@ model Build {
 
   equipments   BuildEquipment[]
   status       BuildStatus?
+
+  likes        Like[]
+  comments     Comment[]
 
   @@index([characterId])
 }
@@ -230,4 +235,27 @@ model BonusSetJson {
   name       String
   setPieces  String[]
   bonuses    Json     // chave = quantidade, valor = bônus parcial
+}
+
+model Like {
+  id        String   @id @default(cuid())
+  userId    String
+  buildId   String
+  createdAt DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id])
+  build Build @relation(fields: [buildId], references: [id])
+
+  @@unique([userId, buildId]) // garante 1 curtida por usuário por build
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  userId    String
+  buildId   String
+  content   String
+  createdAt DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id])
+  build Build @relation(fields: [buildId], references: [id])
 }

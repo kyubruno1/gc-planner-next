@@ -1,6 +1,7 @@
 export interface ItemProps {
   name: string;
   equipmentType: string
+  readOnly?: boolean;
 }
 
 type PropValue = number | { min: number; max: number };

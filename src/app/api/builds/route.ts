@@ -1,5 +1,8 @@
 import { prisma } from "@/lib/prisma";
+import { getServerSession } from "next-auth/next";
 import { NextRequest, NextResponse } from "next/server";
+import { authOptions } from "../auth/[...nextauth]/route";
+
 
 export async function GET() {
   try {
@@ -29,6 +32,15 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
+    const session = await getServerSession(authOptions);
+
+    if (!session?.user?.id) {
+      return NextResponse.json(
+        { error: "Usuário não autenticado" },
+        { status: 401 }
+      );
+    }
+
     const body = await req.json();
 
     const {
@@ -48,6 +60,7 @@ export async function POST(req: NextRequest) {
         jobKey,
         sheetName,
         totalAttack,
+        userId: session.user.id,
         status: {
           create: status,
         },

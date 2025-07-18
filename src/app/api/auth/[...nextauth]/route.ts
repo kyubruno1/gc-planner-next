@@ -2,10 +2,10 @@
 
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcrypt";
-import NextAuth from "next-auth";
+import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-const handler = NextAuth({
+export const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
       name: "credentials",
@@ -20,7 +20,7 @@ const handler = NextAuth({
           where: {
             OR: [
               { email: credentials.login },
-              { name: credentials.login }, // username no campo name
+              { name: credentials.login },
             ],
           },
         });
@@ -67,7 +67,8 @@ const handler = NextAuth({
   },
 
   secret: process.env.NEXTAUTH_SECRET,
-});
+};
 
-// Como o App Router usa handlers específicos, exportamos o handler para GET e POST
+const handler = NextAuth(authOptions);
+
 export { handler as GET, handler as POST };

@@ -17,7 +17,7 @@ import { HoverModal } from "../HoverModal/HoverModal";
 import { PropsModal } from "../PropsModal/PropsModal.tsx";
 import { StonesModalWrapper } from "../StonesModal/StonesModalWrapper.tsx";
 
-export function Items({ name, equipmentType }: SlotProps) {
+export function Items({ name, equipmentType, readOnly = false }: SlotProps) {
   const { addSource, removeSource } = useAtkTotal();
   const { equipped, equipItem, unequipItem, equipProps, equipStone, unequipStone } = useEquip();
   const equippedItem = equipped[name];
@@ -89,14 +89,9 @@ export function Items({ name, equipmentType }: SlotProps) {
       >
         <button
           type="button"
-          className="border-none p-0 cursor-pointer relative"
-          onClick={() => setItemModal(name)}
+          className="border-none p-0 relative"
+          onClick={() => !readOnly && setItemModal(name)} // ✅ CONDICIONADO
         >
-          {/* <img
-            src={equippedItem ? equippedItem.img : getEquipImagePath(`${name}.png`)}
-            alt={equippedItem ? equippedItem.name : name}
-            className="w-[110px] h-[110px] border-2 border-gray rounded-md bg-light-gray"
-          /> */}
           <Image
             src={equippedItem ? equippedItem.img : getEquipImagePath(`${name}.png`)}
             alt={equippedItem ? equippedItem.name : name}
@@ -104,6 +99,7 @@ export function Items({ name, equipmentType }: SlotProps) {
             width={110}
             height={110}
           />
+
           {equippedItem?.selectedLevel !== undefined && (
             <div className="absolute bottom-1 right-1 pointer-events-none z-10">
               <div className="bg-blue-500 text-white text-xs font-bold px-1.5 py-[1px] rounded shadow">
@@ -123,7 +119,8 @@ export function Items({ name, equipmentType }: SlotProps) {
           )}
         </button>
 
-        {hovering && equippedItem && (
+        {/* ✅ BOTÕES SOMENTE SE NÃO FOR READONLY */}
+        {hovering && equippedItem && !readOnly && (
           <div className="absolute top-0 left-10 ml-2 flex flex-col gap-[1px] p-1 rounded-md z-10">
             {equippedItem.equipType === "armor_set" && (
               <>
@@ -138,13 +135,6 @@ export function Items({ name, equipmentType }: SlotProps) {
                   onClick={() => setStoneModal(true)}
                   className="flex px-1 py-[3px] border border-gray-700 rounded-md bg-blue-500 hover:bg-blue-400 text-xs"
                 >
-                  {/* <img
-                    src="/assets/images/system/clean-stone.png"
-                    width={32}
-                    height={11}
-                    className="mx-auto"
-                    alt="Gerenciar Pedra"
-                  /> */}
                   <Image
                     src="/assets/images/system/clean-stone.png"
                     width={32}
@@ -168,13 +158,6 @@ export function Items({ name, equipmentType }: SlotProps) {
                   className="mx-auto"
                   alt="Propriedades"
                 />
-                {/* <img
-                  src="/assets/images/system/arrow_cropped.png"
-                  width={32}
-                  height={11}
-                  className="mx-auto"
-                  alt="Propriedades"
-                /> */}
               </button>
             )}
 
@@ -190,7 +173,8 @@ export function Items({ name, equipmentType }: SlotProps) {
         {hovering && equippedItem && <HoverModal slot={name} />}
       </div>
 
-      {itemModal && (
+      {/* ✅ MODAIS APENAS SE NÃO FOR READONLY */}
+      {!readOnly && itemModal && (
         <EquipmentModal
           type={itemModal}
           equipmentType="armor_set"
@@ -204,7 +188,7 @@ export function Items({ name, equipmentType }: SlotProps) {
         />
       )}
 
-      {cardModal && equippedItem && (
+      {!readOnly && cardModal && equippedItem && (
         <CardModal
           onClose={() => setCardModal(null)}
           rarity={equippedItem.grade || "rare"}
@@ -212,25 +196,23 @@ export function Items({ name, equipmentType }: SlotProps) {
         />
       )}
 
-      {propsModal && equippedItem && (
+      {!readOnly && propsModal && equippedItem && (
         <PropsModal
           propsData={equippedItem.props}
           rarity={equippedItem.grade as "rare" | "epic" | "legendary" | "ancient"}
           initialSelectedProps={equippedItem.selectedProps ?? {}}
           onClose={(selectedProps) => {
             equipProps(name, selectedProps);
-
             const validProps = Object.fromEntries(
               Object.entries(selectedProps).filter(([key]) => key in equippedItem)
             );
-
             addSource(`equip:${name}:props`, validProps as Partial<CharacterStatus>);
             setPropsModal(null);
           }}
         />
       )}
 
-      {stoneModal && equippedItem && (
+      {!readOnly && stoneModal && equippedItem && (
         <StonesModalWrapper
           onClose={() => setStoneModal(false)}
           rarity={equippedItem.grade as "normal" | "epic"}
