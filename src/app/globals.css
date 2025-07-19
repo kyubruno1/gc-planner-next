@@ -39,9 +39,9 @@
   --color-equipAncient: #D4646F !important;
   --shadow-dark-blue: 0 0 1px 3px #415870 !important;
   --border-width-3: 3px !important;
-}
+} */
 
-.safe-colors,
+/* .safe-colors,
 .safe-colors * {
   background-color: #a1b8ce !important;
   color: black !important;
@@ -87,4 +87,27 @@
 
 .hide-scrollbar::-webkit-scrollbar {
   display: none;             /* Chrome, Safari e Opera */
+}
+
+.clip-hex {
+  clip-path: polygon(
+    8% 0%, 92% 0%, 100% 50%, 92% 100%, 8% 100%, 0% 50%
+  );
+}
+
+
+.clip-hex {
+  clip-path: polygon(
+    8% 0%, 92% 0%, 100% 50%, 92% 100%, 8% 100%, 0% 50%
+  );
+}
+
+.clip-top-left-diagonal {
+  clip-path: polygon(
+    40px 0,    /* vai 20px à direita do canto‐sup‐esq */
+    100% 0,    /* canto‐sup‐dir */
+    100% 100%, /* canto‐inf‐dir */
+    0 100%,    /* canto‐inf‐esq */
+    0 40px     /* sobe 20px no lado esquerdo */
+  );
 }

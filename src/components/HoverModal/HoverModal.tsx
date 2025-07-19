@@ -65,12 +65,12 @@ export function HoverModal({ slot }: HoverModalProps) {
 
   return (
     <>
-      <div className="absolute top-5 left-28 ml-2 flex flex-col gap-[1px] p-1 rounded-md z-10 bg-bghovermodal/70 h-auto w-96">
+      <div className="clip-top-left-diagonal absolute top-5 left-28 ml-2 flex flex-col gap-[1px] p-1 rounded-md z-10 bg-bghovermodal/70 h-auto w-96">
         <div className={`text-shadow-title font-bold flex justify-center py-3 border-b border-bgdarkblue ${gradeColor}`}>
           <p>{itemNames[equippedItem.name]}</p>
         </div>
 
-        <div className="flex p-4 justify-between border-b border-bgdarkblue items-center">
+        <div className="flex p-4 justify-between border-b border-bgdarkblue  items-center">
           <div className="text-white text-shadow-title font-bold flex gap-5 items-center rounded-md">
             <img className="w-[110px] h-[110px] rounded-md" src={equippedItem.img} alt={equippedItem.name} />
             <div>
