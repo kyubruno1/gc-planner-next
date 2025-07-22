@@ -1,4 +1,4 @@
-import { StoneSlotData } from "@/components/StonesModal/StonesModal.types";
+import { StoneSlotData } from "@/components/Equip/StonesModal/StonesModal.types";
 import { CharacterStatus } from "./characterStatus";
 
 export type StoneType = "normal" | "epic";

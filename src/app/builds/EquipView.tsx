@@ -8,12 +8,12 @@ import { useEquip } from "@/context/EquipContext";
 
 import changeCharacter from "@/../public/assets/images/system/change_character.png";
 
-import { Comments } from "@/components/Comments/Comments";
-import { EquipOverview } from "@/components/EquipOverview/EquipOverview";
-import { Items } from "@/components/Items/Items";
-import { LikeButton } from "@/components/LikeButton/LikeButton";
-import { PrintEquipModal } from "@/components/PrintEquipModal/PrintEquipModal";
+import { EquipOverview } from "@/components/Equip/EquipOverview/EquipOverview";
+import { Items } from "@/components/Equip/Items/Items";
+import { PrintEquipModal } from "@/components/Equip/PrintEquipModal/PrintEquipModal";
+import { Comments } from "@/components/Share/Comments/Comments";
 import { Status } from "@/components/Status/Status";
+import { LikeButton } from "@/components/UI/LikeButton/LikeButton";
 
 
 interface EquipViewProps {

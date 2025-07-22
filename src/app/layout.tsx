@@ -1,5 +1,5 @@
+import { SiteHeader } from "@/components/Header/SiteHeader/SiteHeader";
 import { Providers } from "@/components/Providers/Providers";
-import { SiteHeader } from "@/components/SiteHeader/SiteHeader";
 import { AtkTotalProvider } from "@/context/AtkTotalContext";
 import { CharacterProvider } from "@/context/CharacterContext";
 import { EquipProvider } from "@/context/EquipContext";
