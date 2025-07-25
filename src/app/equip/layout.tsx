@@ -1,7 +1,6 @@
 // app/equip/layout.tsx
 "use client";
 
-import { PlannerHeader } from "@/components/Header/HeaderPlanner/Header";
 import { AtkTotalProvider } from "@/context/AtkTotalContext";
 import { CharacterProvider } from "@/context/CharacterContext";
 import { EquipProvider } from "@/context/EquipContext";
@@ -15,7 +14,7 @@ export default function EquipLayout({
     <EquipProvider>
       <AtkTotalProvider>
         <CharacterProvider>
-          <PlannerHeader />
+          {/* <PlannerHeader /> */}
           <main>{children}</main>
         </CharacterProvider>
       </AtkTotalProvider>

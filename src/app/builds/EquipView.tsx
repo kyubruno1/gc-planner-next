@@ -8,21 +8,21 @@ import { useEquip } from "@/context/EquipContext";
 
 import changeCharacter from "@/../public/assets/images/system/change_character.png";
 
-import { EquipOverview } from "@/components/Equip/EquipOverview/EquipOverview";
+import { EquipOverview, } from "@/components/Equip/EquipOverview";
 import { Items } from "@/components/Equip/Items/Items";
-import { PrintEquipModal } from "@/components/Equip/PrintEquipModal/PrintEquipModal";
-import { Comments } from "@/components/Share/Comments/Comments";
+import { PrintEquipModal } from "@/components/Equip/PrintEquipModal";
+import { Comments } from "@/components/Share/Comments";
 import { Status } from "@/components/Status/Status";
-import { LikeButton } from "@/components/UI/LikeButton/LikeButton";
+import { LikeButton } from "@/components/ui/LikeButton";
 
 
 interface EquipViewProps {
-  savedBuild: any;
+  savedBuild: any; //Tipar ao fim do projeto com a estrutura completa da build
   readOnly?: boolean;
   userId?: string;
   buildId?: string;
   initialLiked?: boolean;
-  initialComments?: any[];
+  initialComments?: any[]; //Ainda não sei exatamente como vai ser
   likeCount?: number;
 }
 

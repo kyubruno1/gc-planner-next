@@ -1,10 +1,18 @@
-import { SiteHeader } from "@/components/Header/SiteHeader/SiteHeader";
+import { SiteHeader } from "@/components/Header/SiteHeader";
 import { Providers } from "@/components/Providers/Providers";
 import { AtkTotalProvider } from "@/context/AtkTotalContext";
 import { CharacterProvider } from "@/context/CharacterContext";
 import { EquipProvider } from "@/context/EquipContext";
 import { ToastContainer } from "react-toastify";
 import "./globals.css";
+
+export const metadata = {
+  title: "GrandChase Planner",
+  description: "Planeje e compartilhe suas builds de forma fácil",
+  icons: {
+    icon: "/favicon.ico",
+  },
+};
 
 export default function RootLayout({
   children,

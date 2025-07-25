@@ -1,6 +1,7 @@
 export interface ItemProps {
   name: string;
   equipmentType: string
+  slotType?: string,
   readOnly?: boolean;
 }
 

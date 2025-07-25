@@ -10,7 +10,7 @@ import { ItemProps } from "../types/ItemProps";
 // Tipo para o bonus set que virá do banco
 interface BonusSetType {
   bonusType: string;
-  [key: string]: any; // ajuste conforme sua estrutura real
+  [key: string]: any; // ajustar conforme estrutura real
 }
 
 type EquipState = Record<string, EquippedItem>;

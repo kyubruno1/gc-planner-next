@@ -1,4 +1,4 @@
-import { AwakeningSkillTree } from "@/components/AwakeningSkillTree/AwakeningSkillTree";
+import { AwakeningSkillTree } from "@/components/AwakeningSkillTree";
 
 export default function Home() {
   return (

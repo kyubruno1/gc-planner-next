@@ -4,19 +4,45 @@ import { useCharacter } from "@/context/CharacterContext";
 import { useEquip } from "@/context/EquipContext";
 import { useState } from "react";
 
-import { CharacterSelectModal } from "@/components/Characters/CharacterSelectModal/CharacterSelectModal";
-import { SavedCharactersModal } from "@/components/Characters/SavedCharactersModal/SavedCharactersModal";
-import { EquipOverview } from "@/components/Equip/EquipOverview/EquipOverview";
-import { PageContainer } from "@/components/UI/PageContainer/PageContainer";
+import { CharacterSelectModal } from "@/components/Characters/CharacterSelectModal";
+import { SavedCharactersModal } from "@/components/Characters/SavedCharactersModal";
+import { EquipOverview } from "@/components/Equip/EquipOverview";
+import { PageContainer } from "@/components/ui/PageContainer";
 
 import { EquipGrid } from "@/components/Equip/EquipGrid";
+import { EquipHeaderActions } from "@/components/Equip/HeaderEquipActions";
+import { PlannerHeader } from "@/components/Header/Header";
+import { Button } from "@/components/ui/Button";
 import { SavedCharacter } from "@/context/CharacterContext";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { toast } from "react-toastify";
 
 export default function EquipPage() {
 
-  const equipmentLeft = ['helmet', 'upper-armor', 'lower-armor', 'gloves', 'shoes', 'mantle'];
-  const equipmentRight = ['weapon', 'upper-head', 'lower-head', 'upper-back', 'lower-back', 'arms', 'weapon-change', 'ring', 'necklace', 'bracelet', 'earring1', 'earring2'];
+  const equipmentLeft = [
+    { name: 'helmet', equipmentType: 'armor_set' },
+    { name: 'upper-armor', equipmentType: 'armor_set' },
+    { name: 'lower-armor', equipmentType: 'armor_set' },
+    { name: 'gloves', equipmentType: 'armor_set' },
+    { name: 'shoes', equipmentType: 'armor_set' },
+    { name: 'mantle', equipmentType: 'armor_set' },
+  ];
+
+  const equipmentRight = [
+    { name: 'weapon', equipmentType: 'armor_set' },
+    { name: 'upper-head', equipmentType: 'accessories_set' },
+    { name: 'lower-head', equipmentType: 'accessories_set' },
+    { name: 'upper-back', equipmentType: 'accessories_set' },
+    { name: 'lower-back', equipmentType: 'accessories_set' },
+    { name: 'arms', equipmentType: 'accessories_set' },
+    { name: 'weapon-change', equipmentType: 'armor_set' },
+    { name: 'ring', equipmentType: 'accessories_set' },
+    { name: 'necklace', equipmentType: 'accessories_set' },
+    { name: 'bracelet', equipmentType: 'accessories_set' },
+    { name: 'earring1', equipmentType: 'accessories_set' },
+    { name: 'earring2', equipmentType: 'accessories_set' },
+  ];
+
 
   const {
     selectedCharacter,
@@ -74,15 +100,25 @@ export default function EquipPage() {
 
   return (
     <>
-      {/* <div className="absolute inset-0 bg-[url('/assets/images/login.png')] bg-cover bg-center opacity-20 z-0" /> */}
-      <PageContainer>
-        {/* <EquipHeaderActions
-          sheetName={sheetName}
-          setSheetName={setSheetName}
-          onSave={handleSaveCharacter}
-          onOpenSaved={() => setIsSavedModalOpen(true)}
-        /> */}
+      <div className="flex px-5 mb-[-1rem]">
+        <PlannerHeader />
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button className="ml-5 mt-4 w-30">Presets</Button>
+          </DropdownMenuTrigger>
 
+          <DropdownMenuContent className="p-4 w-140 z-[1000]">
+            <EquipHeaderActions
+              sheetName={sheetName}
+              setSheetName={setSheetName}
+              onSave={handleSaveCharacter}
+              onOpenSaved={() => setIsSavedModalOpen(true)}
+            />
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+
+      <PageContainer>
 
         <EquipGrid
           equipmentLeft={equipmentLeft}
@@ -91,11 +127,9 @@ export default function EquipPage() {
           onOpenCharacterModal={() => setIsModalOpen(true)}
         />
 
-
         <div className={`${classes} gap-2 w-full`}>
           <EquipOverview />
         </div>
-
 
       </PageContainer>
 
